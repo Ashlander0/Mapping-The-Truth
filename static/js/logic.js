@@ -44,12 +44,45 @@
 
 		 //Add baseLayers to map as control layers
 		 L.control.layers(baseLayers).addTo(map);
+     
+     var squatchIcon = L.icon({
+      iconUrl: 'C:/Users/billt/OneDrive/Documents/Project3/static/icons/squatch.png',
+      //shadowUrl: 'leaf-shadow.png',
+  
+      iconSize:     [100, 100], // size of the icon
+      //shadowSize:   [50, 64], // size of the shadow
+      //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      //shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+  var alienIcon = L.icon({
+    iconUrl: 'C:/Users/billt/OneDrive/Documents/Project3/static/icons/alien.png',
+    //shadowUrl: 'leaf-shadow.png',
 
+    iconSize:     [100, 100], // size of the icon
+    //shadowSize:   [50, 64], // size of the shadow
+    //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    //shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+      L.marker([47.21095077735268, -123.50078044732939], {icon: squatchIcon}).addTo(map);
+
+      L.marker([47.21095077735268, -103.50078044732939], {icon: alienIcon}).addTo(map);
+      var customOptions =
+      {
+      'maxWidth': '500',
+      'minWidth': '320',
+      'maxHeight': '500',
+      'className' : 'custom'
+      }
+      //var customPopup = "<a href='https://i.imgur.com/Wedw4GR.jpg'>End Of The Line</a><br/><img src='https://i.imgur.com/Wedw4GR.jpg' width='300'/>";
+      //L.marker([47.21095077735268, -123.50078044732939]).bindPopup(customPopup, customOptions).addTo(map);
+// *** REPLACE BELOW WITH CODE TO CALL ON FLASK API/POSTGRE DATABASE ***
 // Store API query variables
-//var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-//var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-//var complaint = "&complaint_type=Rodent";
-//var limit = "&$limit=10000";
+var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
+var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
+var complaint = "&complaint_type=Rodent";
+var limit = "&$limit=10000";
 
 // Assemble API query URL
 var url = baseURL + date + complaint + limit;
@@ -70,7 +103,7 @@ d3.json(url, function(response) {
     if (location) {
 
       // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]])
+      markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]],{icon: squatchIcon})
         .bindPopup(response[i].descriptor));
     }
 
