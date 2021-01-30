@@ -57,7 +57,17 @@
 		});
 			L.marker([47.21095077735268, -123.50078044732939], {icon: AlienIcon}).addTo(map);
 
-
+		var SasquatIcon = L.icon({
+			// iconUrl: '/Users/jbeachy/Box/BootcampHomework/18-Project2/Project-Two-The-Sasquatch-affair-/images/alien.rtf',
+			iconUrl: '../../images/squatch.png',
+			//shadowUrl: 'leaf-shadow.png',
+			iconSize:     [25, 25], // size of the icon
+			//shadowSize:   [50, 64], // size of the shadow
+			//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			//shadowAnchor: [4, 62],  // the same for the shadow
+			popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+			L.marker([45, -120], {icon: SasquatIcon}).addTo(map);
 
 			var UfoIcon = L.icon({
 				// iconUrl: '/Users/jbeachy/Box/BootcampHomework/18-Project2/Project-Two-The-Sasquatch-affair-/images/alien.rtf',
