@@ -44,8 +44,35 @@
 
 		 //Add baseLayers to map as control layers
 		 L.control.layers(baseLayers).addTo(map);
-     
-     var squatchIcon = L.icon({
+ 
+
+		 var AlienIcon = L.icon({
+			 
+			iconUrl: '../../images/alienIcon.png',
+			//shadowUrl: 'leaf-shadow.png',
+			iconSize:     [25, 25], // size of the icon
+			//shadowSize:   [50, 64], // size of the shadow
+			//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			//shadowAnchor: [4, 62],  // the same for the shadow
+			popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+			L.marker([47.21095077735268, -123.50078044732939], {icon: AlienIcon}).addTo(map);
+
+
+
+			var UfoIcon = L.icon({
+				 
+				iconUrl: '../../images/ufoIcon.png',
+				//shadowUrl: 'leaf-shadow.png',
+				iconSize:     [25, 25], // size of the icon
+				//shadowSize:   [50, 64], // size of the shadow
+				//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+				//shadowAnchor: [4, 62],  // the same for the shadow
+				popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+			});
+				L.marker([50, -125], {icon: UfoIcon}).addTo(map);
+
+      var squatchIcon = L.icon({
       iconUrl: 'C:/Users/billt/OneDrive/Documents/Project3/static/icons/squatch.png',
       //shadowUrl: 'leaf-shadow.png',
   
@@ -55,20 +82,9 @@
       //shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
-  var alienIcon = L.icon({
-    iconUrl: 'C:/Users/billt/OneDrive/Documents/Project3/static/icons/alien.png',
-    //shadowUrl: 'leaf-shadow.png',
+    L.marker([47.21095077735268, -123.50078044732939], {icon: squatchIcon}).addTo(map);
 
-    iconSize:     [100, 100], // size of the icon
-    //shadowSize:   [50, 64], // size of the shadow
-    //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    //shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
-      L.marker([47.21095077735268, -123.50078044732939], {icon: squatchIcon}).addTo(map);
-
-      L.marker([47.21095077735268, -103.50078044732939], {icon: alienIcon}).addTo(map);
-      var customOptions =
+   var customOptions =
       {
       'maxWidth': '500',
       'minWidth': '320',
@@ -78,6 +94,15 @@
       //var customPopup = "<a href='https://i.imgur.com/Wedw4GR.jpg'>End Of The Line</a><br/><img src='https://i.imgur.com/Wedw4GR.jpg' width='300'/>";
       //L.marker([47.21095077735268, -123.50078044732939]).bindPopup(customPopup, customOptions).addTo(map);
 // *** REPLACE BELOW WITH CODE TO CALL ON FLASK API/POSTGRE DATABASE ***
+ 
+     
+     
+  
+      
+
+    
+     
+ 
 // Store API query variables
 var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
 var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
