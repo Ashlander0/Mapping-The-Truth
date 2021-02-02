@@ -73,7 +73,7 @@
 				L.marker([50, -125], {icon: UfoIcon}).addTo(map);
 
       var squatchIcon = L.icon({
-      iconUrl: 'C:/Users/billt/OneDrive/Documents/Project3/static/icons/squatch.png',
+      iconUrl: '../../images/squatch.png',
       //shadowUrl: 'leaf-shadow.png',
   
       iconSize:     [100, 100], // size of the icon
