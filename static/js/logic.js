@@ -35,7 +35,7 @@ L.control.layers(baseLayers).addTo(map);
  
 
 var AlienIcon = L.icon({
-	iconUrl: '../../images/alienIcon.png',
+	iconUrl: 'static/icons/alien.png',
 	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
 	//shadowSize:   [50, 64], // size of the shadow
@@ -44,7 +44,7 @@ var AlienIcon = L.icon({
 	popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-L.marker([47.21095077735268, -123.50078044732939], {icon: AlienIcon}).addTo(map);
+L.marker([45, -115], {icon: AlienIcon}).addTo(map);
 
 var UfoIcon = L.icon({
 	iconUrl: '../../images/ufoIcon.png',
@@ -59,10 +59,10 @@ var UfoIcon = L.icon({
 L.marker([50, -125], {icon: UfoIcon}).addTo(map);
 
 var squatchIcon = L.icon({
-	iconUrl: '../../images/squatch.png',
+	iconUrl: 'static/icons/squatch.png',
 	//shadowUrl: 'leaf-shadow.png',
 
-	iconSize:     [100, 100], // size of the icon
+	iconSize:     [25, 25], // size of the icon
 	//shadowSize:   [50, 64], // size of the shadow
 	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
 	//shadowAnchor: [4, 62],  // the same for the shadow
@@ -78,45 +78,76 @@ var customOptions = {
 	'className' : 'custom'
 }
 
-//var customPopup = "<a href='https://i.imgur.com/Wedw4GR.jpg'>End Of The Line</a><br/><img src='https://i.imgur.com/Wedw4GR.jpg' width='300'/>";
-//L.marker([47.21095077735268, -123.50078044732939]).bindPopup(customPopup, customOptions).addTo(map);
-// *** REPLACE BELOW WITH CODE TO CALL ON FLASK API/POSTGRE DATABASE ***
+
+//===================================================================================================================
+// // Store API query variables
+// var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
+// var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
+// var complaint = "&complaint_type=Rodent";
+// var limit = "&$limit=10000";
+
+// // Assemble API query URL
+// var url = baseURL + date + complaint + limit;
+
+// // Grab the data with d3
+// d3.json(url, function(response) {
+
+// 	// Create a new marker cluster group
+// 	var markers = L.markerClusterGroup();
+
+// 	// Loop through data
+// 	for (var i = 0; i < response.length; i++) {
+
+// 		// Set the data location property to a variable
+// 		var location = response[i].location;
+
+// 		// Check for location property
+// 		if (location) {
+
+// 			// Add a new marker to the cluster group and bind a pop-up
+// 			markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]],{icon: squatchIcon})
+// 			.bindPopup(response[i].descriptor));
+// 		}
+
+// 	}
+
+// 	// Add our marker cluster layer to the map
+// 	map.addLayer(markers);
+
+// });
+//===================================================================================================================
 
 
 
-
-// Store API query variables
-var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-var complaint = "&complaint_type=Rodent";
-var limit = "&$limit=10000";
-
-// Assemble API query URL
-var url = baseURL + date + complaint + limit;
+// Store API query variables ======================== CODE IS BASED ON COMMENTED BLOCK ABOVE ========================
+var url = "../../Data/json/Bigfoot.json";
 
 // Grab the data with d3
 d3.json(url, function(response) {
 
-  // Create a new marker cluster group
-  var markers = L.markerClusterGroup();
+	// Create a new marker cluster group
+	var markers = L.markerClusterGroup();
 
-  // Loop through data
-  for (var i = 0; i < response.length; i++) {
+	// Loop through data
+	for (var i = 0; i < response.length; i++) {
 
-    // Set the data location property to a variable
-    var location = response[i].location;
+		// Set the data location property to a variable
+		var lat = response[i].latitude;
+		var lon = response[i].longitude;
+		var location = [lat, lon];
 
-    // Check for location property
-    if (location) {
+		// Check for location property
+		if (location) {
+			console.log(response[0].latitude)
+			// Add a new marker to the cluster group and bind a pop-up
+			markers.addLayer(L.marker([lat, lon],{icon: squatchIcon})
+			.bindPopup(response[i].title));
+		}
 
-      // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]],{icon: squatchIcon})
-        .bindPopup(response[i].descriptor));
-    }
+	}
 
-  }
-
-  // Add our marker cluster layer to the map
-  map.addLayer(markers);
+	// Add our marker cluster layer to the map
+	map.addLayer(markers);
 
 });
+//===================================================================================================================
