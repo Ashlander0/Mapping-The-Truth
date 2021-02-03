@@ -44,8 +44,6 @@ var AlienIcon = L.icon({
 	popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-L.marker([45, -115], {icon: AlienIcon}).addTo(map);
-
 var UfoIcon = L.icon({
 	iconUrl: '../../images/ufoIcon.png',
 	//shadowUrl: 'leaf-shadow.png',
@@ -56,8 +54,6 @@ var UfoIcon = L.icon({
 	popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-L.marker([50, -125], {icon: UfoIcon}).addTo(map);
-
 var squatchIcon = L.icon({
 	iconUrl: 'static/icons/squatch.png',
 	//shadowUrl: 'leaf-shadow.png',
@@ -66,10 +62,8 @@ var squatchIcon = L.icon({
 	//shadowSize:   [50, 64], // size of the shadow
 	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
 	//shadowAnchor: [4, 62],  // the same for the shadow
-	popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
-
-L.marker([47.21095077735268, -123.50078044732939], {icon: squatchIcon}).addTo(map);
 
 var customOptions = {
 	'maxWidth': '500',
@@ -118,9 +112,10 @@ var customOptions = {
 //===================================================================================================================
 
 
+//===================================================================================================================
 
-// Store API query variables ======================== CODE IS BASED ON COMMENTED BLOCK ABOVE ========================
-var url = "../../Data/json/Bigfoot.json";
+// Assemble API query URL
+var url = '../../Data/json/Bigfoot.json';
 
 // Grab the data with d3
 d3.json(url, function(response) {
@@ -129,18 +124,19 @@ d3.json(url, function(response) {
 	var markers = L.markerClusterGroup();
 
 	// Loop through data
-	for (var i = 0; i < response.length; i++) {
+	for (var i = 0; i < 50; i++) {
 
 		// Set the data location property to a variable
+
 		var lat = response[i].latitude;
 		var lon = response[i].longitude;
 		var location = [lat, lon];
 
 		// Check for location property
 		if (location) {
-			console.log(response[0].latitude)
+
 			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker([lat, lon],{icon: squatchIcon})
+			markers.addLayer(L.marker(location,{icon: squatchIcon})
 			.bindPopup(response[i].title));
 		}
 
