@@ -116,7 +116,7 @@ var customOptions = {
 
 // Assemble API query URL
 var bigfootURL = '../../Data/json/Bigfoot.json';
-var alienURL = '';
+var alienURL = ' ';
 
 // Grab the data with d3
 d3.json(bigfootURL, function(response) {
