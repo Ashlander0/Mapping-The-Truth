@@ -115,15 +115,17 @@ var customOptions = {
 //===================================================================================================================
 
 // Assemble API query URL
-var bigfootURL = '../../Data/json/Bigfoot.json';
-var alienURL = ' ';
+var bigfootURL = '../../Data/json/bigfoot.json';
+var alienURL = '../../Data/json/aliens.json';
+var dogmanURL = '../../Data/json/dogman.json';
+var hauntedURL = '../../Data/json/hauntedplaces.json';
 
-// Grab the data with d3
+// Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
 
 	// Create a new marker cluster group
 	var markers = L.markerClusterGroup();
-	console.log(response.length);
+
 	// Loop through data
 	for (var i = 0; i < Object.keys(response).length; i++) {
 
@@ -147,4 +149,6 @@ d3.json(bigfootURL, function(response) {
 	map.addLayer(markers);
 
 });
+
+
 //===================================================================================================================
