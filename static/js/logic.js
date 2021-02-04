@@ -115,16 +115,17 @@ var customOptions = {
 //===================================================================================================================
 
 // Assemble API query URL
-var url = '../../Data/json/Bigfoot.json';
+var bigfootURL = '../../Data/json/Bigfoot.json';
+var alienURL = '';
 
 // Grab the data with d3
-d3.json(url, function(response) {
+d3.json(bigfootURL, function(response) {
 
 	// Create a new marker cluster group
 	var markers = L.markerClusterGroup();
-
+	console.log(response.length);
 	// Loop through data
-	for (var i = 0; i < 50; i++) {
+	for (var i = 0; i < Object.keys(response).length; i++) {
 
 		// Set the data location property to a variable
 
