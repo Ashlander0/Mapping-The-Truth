@@ -41,11 +41,12 @@ body {
   display:inline-block;
   vertical-align: top;
   width: calc(20% - 22px);
-  height: calc(90% - 130px);
+  height: calc(88% - 130px);
+  padding: 10px;
 }
 
 #map {
   display: inline-block;
-  width: 60%;
+  width: calc(60% - 40px);
   height: calc(90% - 130px);
 }
