@@ -57,7 +57,6 @@ var UfoIcon = L.icon({
 var squatchIcon = L.icon({
 	iconUrl: 'static/icons/squatch.png',
 	//shadowUrl: 'leaf-shadow.png',
-
 	iconSize:     [25, 25], // size of the icon
 	//shadowSize:   [50, 64], // size of the shadow
 	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
@@ -80,17 +79,17 @@ var hauntedURL = '../../Data/json/hauntedplaces.json';
 
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
-	addMarkers(response);
+	addMarkers(response, squatchIcon);
 });
 
 // Grab Alien data
-d3.json(alienURL, function(response) {
-	addMarkers(response);
+d3.json(dogmanURL, function(response) {
+	addMarkers(response, AlienIcon);
 });
 
-function addMarkers(data) {
+function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
-	var markers = L.markerClusterGroup();
+	var markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
@@ -103,10 +102,13 @@ function addMarkers(data) {
 
 		// Check for location property
 		if (location) {
+			var popup = data[i].date +
+						'<br/><br/>' +
+						data[i].title;
 
 			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker(location,{icon: squatchIcon})
-			.bindPopup(data[i].title));
+			markers.addLayer(L.marker(location,{icon: iconVar})
+			.bindPopup(popup));
 		}
 
 	}
