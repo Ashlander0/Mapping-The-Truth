@@ -72,48 +72,6 @@ var customOptions = {
 	'className' : 'custom'
 }
 
-
-//===================================================================================================================
-// // Store API query variables
-// var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-// var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-// var complaint = "&complaint_type=Rodent";
-// var limit = "&$limit=10000";
-
-// // Assemble API query URL
-// var url = baseURL + date + complaint + limit;
-
-// // Grab the data with d3
-// d3.json(url, function(response) {
-
-// 	// Create a new marker cluster group
-// 	var markers = L.markerClusterGroup();
-
-// 	// Loop through data
-// 	for (var i = 0; i < response.length; i++) {
-
-// 		// Set the data location property to a variable
-// 		var location = response[i].location;
-
-// 		// Check for location property
-// 		if (location) {
-
-// 			// Add a new marker to the cluster group and bind a pop-up
-// 			markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]],{icon: squatchIcon})
-// 			.bindPopup(response[i].descriptor));
-// 		}
-
-// 	}
-
-// 	// Add our marker cluster layer to the map
-// 	map.addLayer(markers);
-
-// });
-//===================================================================================================================
-
-
-//===================================================================================================================
-
 // Assemble API query URL
 var bigfootURL = '../../Data/json/bigfoot.json';
 var alienURL = '../../Data/json/aliens.json';
@@ -122,17 +80,25 @@ var hauntedURL = '../../Data/json/hauntedplaces.json';
 
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
+	addMarkers(response);
+});
 
+// Grab Alien data
+d3.json(alienURL, function(response) {
+	addMarkers(response);
+});
+
+function addMarkers(data) {
 	// Create a new marker cluster group
 	var markers = L.markerClusterGroup();
 
 	// Loop through data
-	for (var i = 0; i < Object.keys(response).length; i++) {
+	for (var i = 0; i < Object.keys(data).length; i++) {
 
 		// Set the data location property to a variable
 
-		var lat = response[i].latitude;
-		var lon = response[i].longitude;
+		var lat = data[i].latitude;
+		var lon = data[i].longitude;
 		var location = [lat, lon];
 
 		// Check for location property
@@ -140,15 +106,14 @@ d3.json(bigfootURL, function(response) {
 
 			// Add a new marker to the cluster group and bind a pop-up
 			markers.addLayer(L.marker(location,{icon: squatchIcon})
-			.bindPopup(response[i].title));
+			.bindPopup(data[i].title));
 		}
 
 	}
 
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
-
-});
+};
 
 
 //===================================================================================================================
