@@ -28,8 +28,12 @@ function onChange() {
 	console.log(value);
 
 	d3.json(bigfootURL, function(response) {
-		stats.text('');
-		stats.text(`Location: ${response[value].county}, ${response[value].state}`);
+		stats.html('');
+		stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
+						Date: ${response[value].date}<br/>
+						Classification: ${response[value].classification}<br/>
+						<br/>
+						Incident:</p>`);
 		summaryText.text('');
 		summaryText.text(response[value].summary)
 	});

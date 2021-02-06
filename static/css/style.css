@@ -66,25 +66,48 @@ body {
 
 select {
   background-color: rgba(0,0,0,0);
+  font-family: monospace;
   color: darkorange;
   border-width: 0px;
   outline: none;
   width: 100%;
 }
 
-#stat {
-  color: darkorange;
-  overflow:auto;
-  width: 100%;
-  height: 50%;
-}
 option {
   background-color: rgba(0,0,0,0);
 }
 
-#summaryText {
+p {
   color: darkorange;
   overflow:auto;
   width: 100%;
-  height: 50%;
+  font-family: monospace;
+  margin-bottom: 5px;
+}
+
+#summaryText {
+  border-radius: 3px;
+  margin-top: 0px;
+  padding: 5px;
+  background-color: rgba(0,0,0,.5);
+  width: 100%;
+  height: 76%;
+}
+
+
+/* Tracks */
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkorange; 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }

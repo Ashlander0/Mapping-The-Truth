@@ -7,7 +7,7 @@ var granimInstance = new Granim({
     image : {
         source: 'images/bg.png',
 		// source: 'images/aleinbg.jpeg',
-		position: ['center','center'],
+		position: ['center','bottom'],
         blendingMode: 'multiply'
     },
     states : {
