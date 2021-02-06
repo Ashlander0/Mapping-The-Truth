@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Marker Clusters</title>
+    <title>Project 2</title>
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
@@ -20,28 +20,46 @@
     
 
   </head>
-  <body>
+ 
+
+ 
+  <body height=100%>
+  
+    <h1 id='title' class='bgBox'>Mapping the Truth</h1>
     
-
-    <div id="map">
-      <canvas id="canvas-complex">
-
-
-
-
-    </canvas>
+    <canvas id="canvas-complex">
+      <!-- <img src="./images/bg.png" alt="hello" style="background-position: center;background-size: cover;" id='background'> -->
+  </canvas>
+    <!-- bf box -->
+    <div id='summaryBox' class='sidebox bgBox'>
+      <select id='bigfoot'>
+        <option value='default'>Select Bigfoot Sighting...</option>
+      </select>
+      <select id='alien'>
+        <option value='default'>Select UFO Sighting...</option>
+      </select>
+    </div>
+    
+    <!-- Map -->
+    <div id="map" class='bgBox'></div>
+    
+    <!-- alien box -->
+    <div id='visBox' class='sidebox bgBox'>
+      <img src='images/bigfoot.png' width=100% height=50% alt='Visualization 1'>
+      <img src='images/bigfoot.png' width=100% height=50% alt='Visualization 2'>
     </div>
 
+
+
+ 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
     crossorigin=""></script>
     <!-- d3 JS -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-
     <!-- Marker Cluster JS -->
     <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
-
     <!-- Our JS -->
     <!-- Granim -->
     <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.min.js"></script> -->
