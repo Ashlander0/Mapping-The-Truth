@@ -118,6 +118,3 @@ function addMarkers(data, iconVar) {
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
-
-
-//===================================================================================================================

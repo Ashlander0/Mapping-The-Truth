@@ -1,6 +1,8 @@
 // Add options for each sighting to dropdown
 var bigfootDropdown = d3.select('#bigfoot');
 var alienDropdown = d3.select('#alien');
+var stats = d3.select('#stat');
+var summaryText = d3.select('#summaryText');
 
 function addToBFDropdown(response) {
 	for (i = 0; i < Object.keys(response).length; i++) {
@@ -19,6 +21,17 @@ function addToADropdown(response) {
 	};
 };
 
-function changeFunction(value, response) {
+bigfootDropdown.on('change', onChange);
 
-}
+function onChange() {
+	value = bigfootDropdown.property('value');
+	console.log(value);
+
+	d3.json(bigfootURL, function(response) {
+		stats.text('');
+		stats.text(`Location: ${response[value].county}, ${response[value].state}`);
+		summaryText.text('');
+		summaryText.text(response[value].summary)
+	});
+
+};
