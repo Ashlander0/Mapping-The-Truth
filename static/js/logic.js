@@ -80,12 +80,14 @@ var hauntedURL = '../../Data/json/hauntedplaces.json';
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
 	addMarkers(response, squatchIcon);
+	addToBFDropdown(response);
 });
 
 // Grab Alien data
-d3.json(dogmanURL, function(response) {
-	addMarkers(response, AlienIcon);
-});
+// d3.json(alienURL, function(response) {
+// 	addMarkers(response, AlienIcon);
+// 	addToADropdown(response);
+// });
 
 function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
