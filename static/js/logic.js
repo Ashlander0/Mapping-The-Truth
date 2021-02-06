@@ -84,10 +84,17 @@ d3.json(bigfootURL, function(response) {
 });
 
 // Grab Alien data
+<<<<<<< HEAD
 d3.json(alienURL, function(response) {
 	addMarkers(response, AlienIcon);
 	addToADropdown(response);
 });
+=======
+// d3.json(alienURL, function(response) {
+// 	addMarkers(response, AlienIcon);
+// 	addToADropdown(response);
+// });
+>>>>>>> aa60bbfdc41a7a4770e5177bea99f970e2db1596
 
 function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
