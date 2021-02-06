@@ -13,7 +13,7 @@ function addToBFDropdown(response) {
 
 function addToADropdown(response) {
 	for (i = 0; i < Object.keys(response).length; i++) {
-		var loc = `${response[i].city}, ${response[i].state}: ${response[i].date}`
+		var loc = `${response[i].city}, ${response[i].state}`
 		var value = Object.keys(response)[i];
 		alienDropdown.append('option').text(`${loc}`).property('value', value);
 	};
