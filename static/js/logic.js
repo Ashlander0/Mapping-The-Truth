@@ -103,7 +103,7 @@ var customOptions = {
 
 // Assemble API query URL
 var bigfootURL = '../../Data/json/bigfoot.json';
-var alienURL = '../../Data/json/aliens.json';
+var alienURL = '../../Data/json/aliens-short.json';
 var dogmanURL = '../../Data/json/dogman.json';
 var hauntedURL = '../../Data/json/hauntedplaces.json';
 
@@ -114,10 +114,10 @@ d3.json(bigfootURL, function(response) {
 });
 
 // Grab Alien data
-// d3.json(alienURL, function(response) {
-// 	addMarkers(response, AlienIcon);
-// 	addToADropdown(response);
-// });
+d3.json(alienURL, function(response) {
+	addMarkers(response, AlienIcon);
+	addToADropdown(response);
+});
 
 function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
