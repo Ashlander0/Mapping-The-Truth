@@ -73,18 +73,20 @@ var customOptions = {
 
 // Assemble API query URL
 var bigfootURL = '../../Data/json/bigfoot.json';
-var alienURL = '../../Data/json/aliens.json';
+var alienURL = '../../Data/json/aliens-short.json';
 var dogmanURL = '../../Data/json/dogman.json';
 var hauntedURL = '../../Data/json/hauntedplaces.json';
 
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
 	addMarkers(response, squatchIcon);
+	addToBFDropdown(response);
 });
 
 // Grab Alien data
-d3.json(dogmanURL, function(response) {
+d3.json(alienURL, function(response) {
 	addMarkers(response, AlienIcon);
+	addToADropdown(response);
 });
 
 function addMarkers(data, iconVar) {

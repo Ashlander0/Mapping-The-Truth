@@ -50,3 +50,10 @@ body {
   width: calc(60% - 40px);
   height: calc(90% - 130px);
 }
+
+select {
+  background-color: rgba(0,0,0,0);
+  color: darkorange;
+  border-width: 0px;
+  outline: none;
+}
