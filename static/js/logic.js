@@ -1,3 +1,32 @@
+
+
+var granimInstance = new Granim({
+    element: '#canvas-complex',
+    direction: 'diagonal',
+    isPausedWhenNotInView: true,
+    image : {
+        source: 'images/bg.png',
+		// source: 'images/aleinbg.jpeg',
+		position: ['center','center'],
+        blendingMode: 'multiply'
+    },
+    states : {
+        "default-state": {
+            gradients: [
+                ['#29323c', '#485563'],
+                ['#FF6B6B', '#556270'],
+                ['#80d3fe', '#7ea0c4'],
+                ['#f0ab51', '#eceba3']
+				['#ff9966', '#ff5e62'],
+                ['#00F260', '#0575E6'],
+                ['#e1eec3', '#f05053']
+            ],
+            transitionSpeed: 7000
+        }
+    }
+	 
+});
+
 //OSM tiles attribution and URL
 var osmLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 var osmURL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -43,6 +72,7 @@ var AlienIcon = L.icon({
 	//shadowAnchor: [4, 62],  // the same for the shadow
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
+ 
 
 var UfoIcon = L.icon({
 	iconUrl: '../../images/ufoIcon.png',

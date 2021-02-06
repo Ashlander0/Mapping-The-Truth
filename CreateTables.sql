@@ -28,7 +28,7 @@ CREATE TABLE bigfoot(
 	latitude decimal,
 	longitude decimal,
 	date date,
-	number integer,
+	number integer PRIMARY KEY,
 	classification VARCHAR(10),
 	geohash VARCHAR(30),
 	temperature_high decimal,
