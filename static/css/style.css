@@ -37,14 +37,14 @@ body {
 .sidebox {
   display:inline-block;
   vertical-align: top;
-  width: calc(20% - 22px);
+  width: calc(25% - 22px);
   height: calc(88% - 130px);
   padding: 10px;
 }
 
 #map {
   display: inline-block;
-  width: calc(60% - 40px);
+  width: calc(50% - 40px);
   height: calc(90% - 130px);
   z-index: 0;
   opacity: 1.0;
