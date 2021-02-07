@@ -65,7 +65,7 @@ L.control.layers(baseLayers).addTo(map);
  
 
 var AlienIcon = L.icon({
-	iconUrl: 'static/icons/alien.png',
+	iconUrl: 'static/icons/alienOutlineSM.png',
 	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
 	//shadowSize:   [50, 64], // size of the shadow
@@ -86,7 +86,7 @@ var UfoIcon = L.icon({
 });
 
 var squatchIcon = L.icon({
-	iconUrl: 'static/icons/squatch.png',
+	iconUrl: 'static/icons/squatchOutlineSM.png',
 	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
 	//shadowSize:   [50, 64], // size of the shadow
