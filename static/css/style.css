@@ -127,11 +127,13 @@ p {
 }
 
 #UFObutton {
+  outline: none;
   background-color: darkorange;
   color: black;
 }
 
 #BFbutton {
+  outline: none;
   background-color: darkorange;
   color: black;
 }
