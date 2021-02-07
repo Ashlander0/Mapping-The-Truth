@@ -58,7 +58,6 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  
   z-index: -1;
 }
  
@@ -66,7 +65,43 @@ body {
 
 select {
   background-color: rgba(0,0,0,0);
+  font-family: monospace;
   color: darkorange;
   border-width: 0px;
   outline: none;
+  width: 100%;
+}
+
+option {
+  background-color: rgba(0,0,0,0);
+}
+
+p {
+  color: darkorange;
+  overflow:auto;
+  width: 100%;
+  font-family: monospace;
+  margin-top: 0px;
+  margin-bottom: 1px;
+}
+
+#summaryText {
+  border-radius: 3px;
+  margin-top: 0px;
+  padding: 7px;
+  background-color: rgba(0,0,0,.5);
+  width: calc(100% - 14px);
+  height: 79%;
+}
+
+
+/* Tracks */
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkorange; 
 }

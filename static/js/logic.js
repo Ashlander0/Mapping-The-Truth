@@ -7,7 +7,7 @@ var granimInstance = new Granim({
     image : {
         source: 'images/bg.png',
 		// source: 'images/aleinbg.jpeg',
-		position: ['center','center'],
+		position: ['center','bottom'],
         blendingMode: 'multiply'
     },
     states : {
@@ -148,6 +148,3 @@ function addMarkers(data, iconVar) {
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
-
-
- 
