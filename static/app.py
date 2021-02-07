@@ -22,9 +22,9 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(engine, reflect=True)
 
-# Save reference to the table
+# Save references to the tables
 Bigfoot = Base.classes.bigfoot
-
+Aliens = Base.classes.aliens
 #################################################
 # Flask Setup
 #################################################
@@ -41,13 +41,43 @@ def welcome():
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/bigfoot<br/>"
+        f"/api/v1.0/aliens<br/>"
     )
+
+@app.route(f"/api/v1.0/aliens")
+def aliens():
+    # Create session link
+    session = Session(engine)
+
+    #query alien data
+    results = session.query(Aliens.title, Aliens.city, Aliens.state, Aliens.date_time, Aliens.shape, Aliens.duration, Aliens.stats, Aliens.report_link, Aliens.summary, Aliens.posted, Aliens.latitude, Aliens.longitude)
+    #create a dictionary for row data from aliens table
+    all_aliens = []
+    for title, city, state, date_time, shape, duration, stats, report_link, summary, posted, latitude, longitude in results:
+        aliens_dict = {}
+        aliens_dict["title"] = title
+        aliens_dict["city"] = city
+        aliens_dict["state"] = state
+        aliens_dict["date_time"] = date_time
+        aliens_dict["shape"] = shape
+        aliens_dict["duration"] = duration
+        aliens_dict["stats"] = stats
+        aliens_dict["report_link"] = report_link
+        aliens_dict["summary"] = summary
+        aliens_dict["posted"] = posted
+        aliens_dict["latitude"] = latitude
+        aliens_dict["longitude"] = longitude
+
+        all_aliens.append(aliens_dict)
+
+        return jsonify(all_aliens)
+
 @app.route("/api/v1.0/bigfoot")
 def bigfoot():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of passenger data including the name, age, and sex of each passenger"""
+    """Return a list of bigfoot data"""
     # Query all squatches
     results = session.query(Bigfoot.summary, Bigfoot.location_details, Bigfoot.county, Bigfoot.state, Bigfoot.season, Bigfoot.title, Bigfoot.latitude, Bigfoot.longitude, Bigfoot.date, Bigfoot.number, Bigfoot.classification, Bigfoot.geohash, Bigfoot.temperature_high, Bigfoot.temperature_mid, Bigfoot.temperature_low,
     Bigfoot.dew_point, Bigfoot.humidity, Bigfoot.cloud_cover, Bigfoot.moon_phase, Bigfoot.precip_intensity, Bigfoot.precip_probability, Bigfoot.precip_type, Bigfoot.pressure,
