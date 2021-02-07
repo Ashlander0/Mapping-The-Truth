@@ -21,9 +21,10 @@ function addToADropdown(response) {
 	};
 };
 
-bigfootDropdown.on('change', onChange);
+bigfootDropdown.on('change', onChangeBF);
+alienDropdown.on('change', onChangeUFO);
 
-function onChange() {
+function onChangeBF() {
 	value = bigfootDropdown.property('value');
 	console.log(value);
 
@@ -37,5 +38,21 @@ function onChange() {
 		summaryText.text('');
 		summaryText.text(response[value].summary)
 	});
+};
 
+function onChangeUFO() {
+	value = alienDropdown.property('value');
+	console.log(value);
+
+	d3.json(alienURL, function(response) {
+		stats.html('');
+		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
+						Date: ${response[value].date}<br/>
+						Duration: ${response[value].duration}<br/>
+						Shape: ${response[value].shape}<br/>
+						<br/>
+						Incident:</p>`);
+		summaryText.text('');
+		summaryText.text(response[value].summary)
+	});
 };

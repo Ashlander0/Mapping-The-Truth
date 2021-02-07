@@ -58,7 +58,6 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  
   z-index: -1;
 }
  
@@ -82,7 +81,8 @@ p {
   overflow:auto;
   width: 100%;
   font-family: monospace;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 1px;
 }
 
 #summaryText {
@@ -91,7 +91,7 @@ p {
   padding: 7px;
   background-color: rgba(0,0,0,.5);
   width: calc(100% - 14px);
-  height: 76%;
+  height: 79%;
 }
 
 
