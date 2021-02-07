@@ -7,6 +7,7 @@ var granimInstance = new Granim({
     image : {
         source: 'images/bg.png',
 		// source: 'images/aleinbg.jpeg',
+		stretchMode: ['stretch-if-bigger', 'stretch-if-bigger'],
 		position: ['center','bottom'],
         blendingMode: 'multiply'
     },
@@ -49,7 +50,7 @@ var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib});
 
 //Map creation
 var map = L.map('map',{
-	layers: [osmMap]
+	layers: [cartoMap]
 }).setView([40.25631414421629, -98.36258169550734], 4);
 
 //Base layers definition and addition
