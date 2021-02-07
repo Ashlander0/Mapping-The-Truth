@@ -27,6 +27,7 @@ alienDropdown.on('change', onChangeUFO);
 function onChangeBF() {
 	value = bigfootDropdown.property('value');
 	console.log(value);
+	document.getElementById('summaryText').style.display = 'block';
 
 	d3.json(bigfootURL, function(response) {
 		stats.html('');
@@ -43,7 +44,8 @@ function onChangeBF() {
 function onChangeUFO() {
 	value = alienDropdown.property('value');
 	console.log(value);
-
+	document.getElementById('summaryText').style.display = 'block';
+	
 	d3.json(alienURL, function(response) {
 		stats.html('');
 		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
@@ -56,3 +58,33 @@ function onChangeUFO() {
 		summaryText.text(response[value].summary)
 	});
 };
+
+var BFbutton = d3.select('#BFbutton');
+var UFObutton = d3.select('#UFObutton');
+//  bigfootDropdown = d3.select('#bigfoot');
+//  alienDropdown = d3.select('#alien');
+
+BFbutton.on('click', BFtoggle);
+UFObutton.on('click', UFOtoggle);
+
+function BFtoggle() {
+	document.getElementById("UFObutton").style.backgroundColor = "rgba(0,0,0,0)";
+	document.getElementById("UFObutton").style.color = "darkorange";
+	document.getElementById("alien").style.display = "none";
+
+	document.getElementById("BFbutton").style.backgroundColor = "darkorange";
+	document.getElementById("BFbutton").style.color = "black";
+	document.getElementById("bigfoot").style.display = "block";
+	console.log('Bigfoot');
+}
+
+function UFOtoggle() {
+	document.getElementById("BFbutton").style.backgroundColor = "rgba(0,0,0,0)";
+	document.getElementById("BFbutton").style.color = "darkorange";
+	document.getElementById("bigfoot").style.display = "none";
+
+	document.getElementById("UFObutton").style.backgroundColor = "darkorange";
+	document.getElementById("UFObutton").style.color = "black";
+	document.getElementById("alien").style.display = "block";
+	console.log('UFO');
+}

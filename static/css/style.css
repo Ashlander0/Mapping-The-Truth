@@ -47,7 +47,7 @@ body {
   width: calc(60% - 40px);
   height: calc(90% - 130px);
   z-index: 0;
-  opacity: 0.7;
+  opacity: 1.0;
 }
 #canvas-complex {
   position: absolute;
@@ -61,14 +61,21 @@ body {
   z-index: -1;
 }
  
-
+#stat {
+  padding-left: 4px;
+}
 
 select {
+  display: none;
+  padding-bottom: 2px;
   background-color: rgba(0,0,0,0);
   font-family: monospace;
   color: darkorange;
-  border-width: 0px;
   outline: none;
+  border-width: 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: darkorange;
   width: 100%;
 }
 
@@ -81,17 +88,18 @@ p {
   overflow:auto;
   width: 100%;
   font-family: monospace;
-  margin-top: 0px;
+  margin-top: 1px;
   margin-bottom: 1px;
 }
 
 #summaryText {
+  display: none;
   border-radius: 3px;
   margin-top: 0px;
   padding: 7px;
   background-color: rgba(0,0,0,.5);
   width: calc(100% - 14px);
-  height: 79%;
+  height: 77%;
 }
 
 
@@ -104,4 +112,26 @@ p {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: darkorange; 
+}
+
+.toggle {
+  display: inline-block;
+  /* background-color: darkorange; */
+  width: calc(50% - 2px);
+  height: 25px;
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  border-width: 0px;
+  margin-bottom: 10px;
+}
+
+#UFObutton {
+  background-color: darkorange;
+  color: black;
+}
+
+#BFbutton {
+  background-color: darkorange;
+  color: black;
 }
