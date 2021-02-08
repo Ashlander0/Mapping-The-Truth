@@ -149,3 +149,9 @@ function addMarkers(data, iconVar) {
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
+
+// FOR PLOTS ========================= //
+d3.json('Data/json/Bigfoot.json').then(function(data) {
+	var states = Object.keys(data).map(data => data.state);
+	console.log(states);
+})
