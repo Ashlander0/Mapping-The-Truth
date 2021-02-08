@@ -151,7 +151,7 @@ function addMarkers(data, iconVar) {
 };
 
 // FOR PLOTS ========================= //
-d3.json('Data/json/Bigfoot.json').then(function(data) {
-	var states = Object.keys(data).map(data => data.state);
-	console.log(states);
-})
+// d3.json('Data/json/Bigfoot.json').then(function(data) {
+// 	var states = Object.keys(data).map(data => data.state);
+// 	console.log(states);
+// })
