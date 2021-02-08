@@ -17,25 +17,33 @@ d3.json(bfURL, function(bfData) {
 	})
 });
 
+// for plot testing
+var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+var test = []
+for (i = 0; i < 3797; i++) {
+	
+	test[i] = _.sample(states);
+}
+// ----------------
+
 var trace1 = {
-	y: ['MN', 'WI', 'AZ', 'MN', 'FL', 'FL', 'FL', 'MN', 'CO'],
+	y: test,
 	// y: bfStates,
 	name: 'Bigfoot',
 	type: 'histogram',
 	color: 'brown'
 };
 
-var layoutMargin = 60;
+var layoutMargin = 100;
 
 var layout = {
 	title: 'Bigfoot Sightings by State',
 	xaxis: {title: 'Sightings'},
-	yaxis: {title: 'State'},
 	margin: {
-		l: layoutMargin,
-		r: layoutMargin,
-		b: layoutMargin,
-		t: layoutMargin,
+		l: 110,
+		r: 0,
+		b: 60,
+		t: 60,
 	}
 };
 
