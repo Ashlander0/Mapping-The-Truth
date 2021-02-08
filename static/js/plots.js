@@ -18,27 +18,57 @@ d3.json(bfURL, function(bfData) {
 });
 
 var trace1 = {
-	y: ['MN', 'WI', 'AZ', 'MN', 'FL', 'FL', 'FL', 'MN', 'CO'],
-	// y: bfStates,
+    // y: test,
+    y: bfStates,
 	name: 'Bigfoot',
-	type: 'histogram',
-	color: 'brown'
+	color: 'rgb(180, 180, 180, .8)',
+    type: 'histogram',
+    marker: {color: 'darkorange'},
 };
 
-var layoutMargin = 60;
+var trace2 = {
+	  // y: test,
+	  y: ufoStates,
+	  name: 'Alien',
+	  type: 'histogram',
+	  marker: {color: 'rgba(110, 204, 57, 0.6)'},
+
+};
+var data = [trace1, trace2];
+
+var layoutMargin = 100;
 
 var layout = {
-	title: 'Bigfoot Sightings by State',
-	xaxis: {title: 'Sightings'},
-	yaxis: {title: 'State'},
-	margin: {
-		l: layoutMargin,
-		r: layoutMargin,
-		b: layoutMargin,
-		t: layoutMargin,
-	}
-};
+	title: 'Sightings per State',
+	font: {color: 'rgb(180, 180, 180)'},
+	plot_bgcolor:'rgb(38, 38, 38)',
+	paper_bgcolor:'rgb(38, 38, 38)',
 
-var data = [trace1];
-
-Plotly.plot('vis1', data, layout)
+	yaxis: {tickfont: {
+        size: 14,
+        
+      }},
+    
+    xaxis: {
+      title: 'Sightings',
+      titlefont: {
+        size: 16,
+        
+      },
+      tickfont: {
+        size: 14,
+       
+      }
+    },
+    legend: {
+      x: 0,
+      y: 1.0,
+      bgcolor: 'rgba(255, 255, 255, 0)',
+      bordercolor: 'rgba(255, 255, 255, 0)'
+    },
+    barmode: 'group',
+    bargap: 0.15,
+	bargroupgap: 0.1
+	
+  };
+//   Plotly.plot('vis1', data, layout)
