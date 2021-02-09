@@ -103,8 +103,8 @@ var customOptions = {
 }
 
 // Assemble API query URL
-var bigfootURL = '../../Data/json/bigfoot.json';
-var alienURL = '../../Data/json/aliens-short.json';
+var bigfootURL = 'Data/json/bigfoot.json';
+var alienURL = 'Data/json/aliens-short.json';
 var dogmanURL = '../../Data/json/dogman.json';
 var hauntedURL = '../../Data/json/hauntedplaces.json';
 
