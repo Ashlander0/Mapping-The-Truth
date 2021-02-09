@@ -1,6 +1,5 @@
 var bfURL = "Data/json/bigfoot.json";
 var ufoURL = 'Data/json/aliens-short.json';
-
 // set arrays for graphing
 var bfStates = [];
 var bfMoon = [];
@@ -69,34 +68,36 @@ d3.json(bfURL, function(bfData) {
 			plot_bgcolor: 'rgb(38,38,38)',
 			paper_bgcolor: 'rgb(38,38,38)',
 			margin: {
+
 				l: 75,
 				r: 20,
 				t: 55,
 				b: 70,
 			},
-			
+      
 			title: {
 				text: 'Sightings per State',
 				color: 'rgb(180, 180, 180)',
 			},
-
+      
 			yaxis: {tickfont: {
 				size: 14,
 				color: 'rgb(180, 180, 180)'
 			}},
-			
+      
 			xaxis: {
 			title: 'Number of sightings',
 			titlefont: {
 				size: 16,
 				color: 'rgb(180, 180, 180)'
 			},
+        
 			tickfont: {
 				size: 14,
 				color: 'rgb(180, 180, 180)'
 			}
 			},
-			
+      
 			legend: {
 			x: .5,
 			y: 1.0,
@@ -104,13 +105,13 @@ d3.json(bfURL, function(bfData) {
 			bgcolor: 'rgba(255, 255, 255, 0)',
 			bordercolor: 'rgba(255, 255, 255, 0)'
 			},
-			
+      
 			barmode: 'group',
 			bargap: 0.15,
 			bargroupgap: 0.1,
 			font: {color: 'rgb(180, 180, 180)'}
 		};
-
+    
 		var data = [trace1, trace2, trace3, trace4];
 
 		Plotly.plot('vis1', data, layout)
