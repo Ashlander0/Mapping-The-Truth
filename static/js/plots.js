@@ -1,6 +1,5 @@
 var bfURL = "Data/json/bigfoot.json";
 var ufoURL = 'Data/json/aliens-short.json';
-
 // set arrays for graphing
 var bfStates = [];
 var bfMoon = [];
@@ -79,7 +78,6 @@ d3.json(bfURL, function(bfData) {
 				text: 'Sightings per State',
 				color: 'rgb(180, 180, 180)',
 			},
-
 			yaxis: {tickfont: {
 				size: 14,
 				color: 'rgb(180, 180, 180)'
