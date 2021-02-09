@@ -100,3 +100,5 @@ d3.json(bfURL, function(bfData) {
 		Plotly.plot('vis1', data, layout)
 	})
 });
+
+// Done
