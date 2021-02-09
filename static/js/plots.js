@@ -1,5 +1,6 @@
-var bfURL = "Data/json/bigfoot.json";
-var ufoURL = 'Data/json/aliens-short.json';
+var bfURL = "../../Data/json/bigfoot.json";
+var ufoURL = '../../Data/json/aliens-short.json';
+
 // set arrays for graphing
 var bfStates = [];
 var bfMoon = [];
