@@ -109,7 +109,6 @@ d3.json(bfURL, function(bfData) {
 			bargroupgap: 0.1,
 			font: {color: 'rgb(180, 180, 180)'}
 		};
-
 		var data = [trace1, trace2, trace3, trace4];
 
 		Plotly.plot('vis1', data, layout)
