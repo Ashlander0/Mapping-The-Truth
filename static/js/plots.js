@@ -91,6 +91,7 @@ d3.json(bfURL, function(bfData) {
 				size: 16,
 				color: 'rgb(180, 180, 180)'
 			},
+			
 			tickfont: {
 				size: 14,
 				color: 'rgb(180, 180, 180)'
