@@ -1,5 +1,4 @@
-
-
+// GRANIM
 var granimInstance = new Granim({
     element: '#canvas-complex',
     direction: 'diagonal',
@@ -18,9 +17,9 @@ var granimInstance = new Granim({
                 ['#FF6B6B', '#556270'],
                 ['#80d3fe', '#7ea0c4'],
                 ['#f0ab51', '#eceba3']
-				['#ff9966', '#ff5e62'],
-                ['#00F260', '#0575E6'],
-                ['#e1eec3', '#f05053']
+				// ['#ff9966', '#ff5e62'],
+                // ['#00F260', '#0575E6'],
+                // ['#e1eec3', '#f05053']
             ],
             transitionSpeed: 7000
         }
@@ -73,17 +72,6 @@ var AlienIcon = L.icon({
 	//shadowAnchor: [4, 62],  // the same for the shadow
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
- 
-
-var UfoIcon = L.icon({
-	iconUrl: '../../images/ufoIcon.png',
-	//shadowUrl: 'leaf-shadow.png',
-	iconSize:     [25, 25], // size of the icon
-	//shadowSize:   [50, 64], // size of the shadow
-	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-	//shadowAnchor: [4, 62],  // the same for the shadow
-	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
-});
 
 var squatchIcon = L.icon({
 	iconUrl: 'static/icons/squatchOutlineSM.png',
@@ -105,8 +93,8 @@ var customOptions = {
 // Assemble API query URL
 var bigfootURL = 'Data/json/bigfoot.json';
 var alienURL = 'Data/json/aliens-short.json';
-var dogmanURL = '../../Data/json/dogman.json';
-var hauntedURL = '../../Data/json/hauntedplaces.json';
+var dogmanURL = 'Data/json/dogman.json';
+var hauntedURL = 'Data/json/hauntedplaces.json';
 
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
