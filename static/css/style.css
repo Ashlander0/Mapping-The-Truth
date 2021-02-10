@@ -7,10 +7,13 @@ body {
   width: calc(100% - 25px);
   height: calc(100% - 25px);
   padding: 5px;
+  margin: 0px;
 }
 
 
 #title {
+  display: inline-block;
+  vertical-align: top;
   width: 400px;
   height: 50px;
   margin-left: auto;
@@ -37,16 +40,19 @@ body {
 .sidebox {
   display:inline-block;
   vertical-align: top;
-  width: calc(25% - 22px);
-  height: calc(88% - 130px);
+  width: calc(10% - 22px);
+  height: calc(100% - 20px);
   padding: 10px;
 }
 
 #map {
   display: inline-block;
-  width: calc(50% - 40px);
+  vertical-align: bottom;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: calc(25% - 40px);
   height: calc(90% - 130px);
-  z-index: 0;
+  /* z-index: 0; */
   opacity: 1.0;
 }
 #canvas-complex {
