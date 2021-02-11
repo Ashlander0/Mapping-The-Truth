@@ -15,26 +15,21 @@
 
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
-     
-
-    
-
   </head>
  
 
  
   <body height=100%>
   
-    <h1 id='title' class='bgBox'>Mapping the Truth</h1>
     
-    <canvas id="canvas-complex">
-      <!-- <img src="./images/bg.png" alt="hello" style="background-position: center;background-size: cover;" id='background'> -->
-  </canvas>
-    <!-- bf box -->
+    
+    <canvas id="canvas-complex"></canvas>
+
+    <!-- summary box -->
     <div id='summaryBox' class='sidebox bgBox'>
       <button id='BFbutton' class='toggle'>Bigfoot</button>
       <button id='UFObutton' class='toggle'>UFOs</button>
-      <select id='bigfoot'>
+      <select id='bigfoot'><br/><br/>
         <option value='default'>Select Bigfoot Report...</option>
       </select>
       <select id='alien'>
@@ -43,10 +38,6 @@
       <p id='stat'></p>
       <p id='summaryText'></p>
     </div>
-
-    <!-- Map -->
-    <div id="map" class='bgBox'></div>
-    
     <!-- vis box -->
     <div id=vis1 class='sidebox bgBox'>
     <!-- <div id='visBox' class='sidebox bgBox'> -->
@@ -54,6 +45,11 @@
       <!-- <div class='visualization' id='vis2'  width=100% height=33% alt='Visualization 2'> -->
       <!-- <img src='images/vis3.png' width=100% height=33% alt='Visualization 3'> -->
     </div>
+    <h1 id='title' class='bgBox'>Mapping the Truth</h1>
+    <!-- Map -->
+    <div id="map" class='bgBox'></div>
+    
+
 
 
     <!-- Plotly -->
