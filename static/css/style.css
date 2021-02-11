@@ -23,24 +23,50 @@ body {
 }
 
 #title {
-  height: 50px;
-  width: 400px;
+  height: auto;
+  width: calc(50% - 12px);
+  max-width: 400px;
+  min-width: 150px;
   margin: 50px auto 100px auto;
   text-align: center;
   color: darkorange;
   font-family: papyrus;
-  background-color: rgba(0,0,0,.5));
+  background-color: rgba(0,0,0,.5);
 }
 
 .sidebox {
-  width: calc(25% - 20px);
-  height: calc(100% - 20px);
+  width: calc(25% - 22px);
+  /* min-width: 200px; */
+  height: calc(100% - 32px);
   margin: 5px;
-  padding: 5px;
+  padding: 10px;
 }
 
 #summaryBox {
   float:left;
+}
+
+#stat {
+  width: 100%;
+  height: auto;
+  background-color: rgba(0,0,0,.0);
+  padding: 0px 0px 5px 4px;
+}
+
+#summaryText {
+  display: none;
+  overflow: auto;
+  margin: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.6);
+  /* color: darkorange; */
+}
+
+p {
+  margin: 0px;
+  font-family: monospace;
+  color: darkorange;
 }
 
 #vis1 {
@@ -48,9 +74,13 @@ body {
 }
 
 #map {
-  width: calc(50% - 20px);
+  display: block;
+  /* vertical-align: bottom; */
+  width: calc(50% - 42px);
+  /* min-width: 100px; */
   height: calc(100% - 220px);
   margin: 5px auto 5px auto;
+  padding: 5px;
 }
 
 .bgBox {
@@ -73,18 +103,8 @@ body {
   background: darkorange; 
 }
 
-.toggle {
-  display: inline-block;
-  /* background-color: darkorange; */
-  width: calc(50% - 2px);
-  height: 25px;
-  text-align: center;
-  font-family: monospace;
-  font-weight: bold;
-  border-width: 0px;
-  margin-bottom: 10px;
-}
 
+/* Buttons */
 #UFObutton {
   outline: none;
   background-color: darkorange;
@@ -95,4 +115,28 @@ body {
   outline: none;
   background-color: darkorange;
   color: black;
+}
+
+select {
+  display: none;
+  background-color: rgba(0,0,0,.0);
+  color: darkorange;
+  font-family: monospace;
+  font-size: 10pt;
+  outline: none;
+  border-color: darkorange;
+  border-width: 0px 0px 1px 0px;
+  width: 100%;
+}
+
+.toggle {
+  display: inline-block;
+  /* background-color: darkorange; */
+  width: calc(50% - 2px);
+  height: 25px;
+  text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  border-width: 0px;
+  margin-bottom: 10px;
 }

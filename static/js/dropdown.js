@@ -75,6 +75,7 @@ function BFtoggle() {
 	document.getElementById("BFbutton").style.backgroundColor = "darkorange";
 	document.getElementById("BFbutton").style.color = "black";
 	document.getElementById("bigfoot").style.display = "block";
+	document.getElementById('summaryText').style.height = 'calc(100% - 153px)';
 	console.log('Bigfoot');
 }
 
@@ -86,5 +87,6 @@ function UFOtoggle() {
 	document.getElementById("UFObutton").style.backgroundColor = "darkorange";
 	document.getElementById("UFObutton").style.color = "black";
 	document.getElementById("alien").style.display = "block";
+	document.getElementById('summaryText').style.height = 'calc(100% - 168px)';
 	console.log('UFO');
 }
