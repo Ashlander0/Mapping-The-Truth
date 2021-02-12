@@ -27,13 +27,23 @@
 
     <!-- summary box -->
     <div id='summaryBox' class='sidebox bgBox'>
-      <button id='BFbutton' class='toggle'>Bigfoot</button>
-      <button id='UFObutton' class='toggle'>UFOs</button>
-      <select id='bigfoot'><br/><br/>
+
+      <button id='BFbutton' class='toggle bf'>Bigfoot</button>
+      <button id='UFObutton' class='toggle ufo'>UFOs</button>
+      <button id='DMbutton' class='toggle dm'>Dogman</button>
+      <button id='HPbutton' class='toggle hp'>Hauntings</button>
+
+      <select id='BFdropdown' class='dropdown bf'><br/><br/>
         <option value='default'>Select Bigfoot Report...</option>
       </select>
-      <select id='alien'>
+      <select id='UFOdropdown' class='dropdown ufo'>
         <option value='default'>Select UFO Report...</option>
+      </select>
+      <select id='DMdropdown' class='dropdown dm'>
+        <option value='default'>Select Dogman Report...</option>
+      </select>
+      <select id='HPdropdown' class='dropdown hp'>
+        <option value='default'>Select Haunted Place...</option>
       </select>
       <p id='stat'></p>
       <p id='summaryText'></p>

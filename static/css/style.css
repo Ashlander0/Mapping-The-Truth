@@ -105,17 +105,7 @@ p {
 
 
 /* Buttons */
-#UFObutton {
-  outline: none;
-  background-color: darkorange;
-  color: black;
-}
 
-#BFbutton {
-  outline: none;
-  background-color: darkorange;
-  color: black;
-}
 
 select {
   display: none;
@@ -131,7 +121,8 @@ select {
 
 .toggle {
   display: inline-block;
-  /* background-color: darkorange; */
+  background-color: darkorange;
+  outline: none;
   width: calc(50% - 2px);
   height: 25px;
   text-align: center;
