@@ -43,46 +43,38 @@ function addToHPDropdown(response) {
 
 
 // change data on dropdown select //
-bigfootDropdown.on('change', onChangeBF);
-alienDropdown.on('change', onChangeUFO);
+bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL)});
+alienDropdown.on('change', function() {onChange(alienDropdown, alienURL)});
 
-function onChangeBF() {
-	value = bigfootDropdown.property('value');
+function onChange(DD, URL) {
+	value = DD.property('value');
 	console.log(value);
 	document.getElementById('summaryText').style.display = 'block';
 
-	d3.json(bigfootURL, function(response) {
+	
+	d3.json(URL, function(response) {
 		stats.html('');
-		stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Classification: ${response[value].classification}<br/>
-						<br/>
-						Incident:</p>`);
+
+		if (DD == bigfootDropdown) {
+			stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
+							Date: ${response[value].date}<br/>
+							Classification: ${response[value].classification}<br/>
+							<br/>
+							Incident:</p>`);
+
+		} else if (DD == alienDropdown) {
+			stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
+							Date: ${response[value].date}<br/>
+							Duration: ${response[value].duration}<br/>
+							Shape: ${response[value].shape}<br/>
+							<br/>
+							Incident:</p>`);
+		};
 		summaryText.text('');
 		summaryText.text(response[value].summary);
 		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
 };
-
-function onChangeUFO() {
-	value = alienDropdown.property('value');
-	console.log(value);
-	document.getElementById('summaryText').style.display = 'block';
-	
-	d3.json(alienURL, function(response) {
-		stats.html('');
-		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Duration: ${response[value].duration}<br/>
-						Shape: ${response[value].shape}<br/>
-						<br/>
-						Incident:</p>`);
-		summaryText.text('');
-		summaryText.text(response[value].summary)
-		map.flyTo([response[value].latitude, response[value].longitude], 15);
-	});
-};
-
 
 // define buttons
 var BFbutton = d3.select('#BFbutton');
