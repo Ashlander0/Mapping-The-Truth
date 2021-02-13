@@ -74,6 +74,18 @@ var squatchIcon = L.icon({
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
+var dogmanIcon = L.icon({
+	iconUrl: 'static/icons/dogmanOutlineSM.png',
+	iconSize:     [25, 25], // size of the icon
+	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+});
+
+var hauntedIcon = L.icon({
+	iconUrl: 'static/icons/hauntedOutlineSM.png',
+	iconSize:     [25, 25], // size of the icon
+	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+});
+
 var customOptions = {
 	'maxWidth': '500',
 	'minWidth': '320',
@@ -90,13 +102,23 @@ var hauntedURL = 'Data/json/hauntedplaces.json';
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
 	addMarkers(response, squatchIcon);
-	addToBFDropdown(response);
+	addToDropdown(response, bigfootDropdown);
 });
 
 // Grab Alien data
 d3.json(alienURL, function(response) {
 	addMarkers(response, AlienIcon);
-	addToADropdown(response);
+	addToDropdown(response, alienDropdown);
+});
+
+d3.json(dogmanURL, function(response) {
+	addMarkers(response, dogmanIcon);
+	addToDropdown(response, dogmanDropdown);
+});
+
+d3.json(hauntedURL, function(response) {
+	addMarkers(response, hauntedIcon);
+	addToDropdown(response, hauntedDropdown);
 });
 
 var markers = []

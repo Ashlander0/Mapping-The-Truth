@@ -117,6 +117,7 @@ select {
   border-color: darkorange;
   border-width: 0px 0px 1px 0px;
   width: 100%;
+  max-width: 50%;
 }
 
 .toggle {

@@ -7,51 +7,36 @@ var stats = d3.select('#stat');
 var summaryText = d3.select('#summaryText');
 
 // populate dropdowns //
-function addToBFDropdown(response) {
+function addToDropdown(response, DD, text) {
 	for (i = 0; i < Object.keys(response).length; i++) {
 		var value = Object.keys(response)[i];
-		var text = `Report #${response[i].number}`;
-	
-		bigfootDropdown.append('option').text(text).property('value', value);
+		if (DD == bigfootDropdown) {
+			var text = `Report #${response[i].number}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == alienDropdown) {
+			var text = `Report #${value}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == dogmanDropdown) {
+			var text = `Report #${value}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == hauntedDropdown) {
+			var text = `${response[i].location}, ${response[i].state_abbrev}`;
+			DD.append('option').text(text).property('value', value);
+		};
 	};
 };
-
-function addToADropdown(response) {
-	for (i = 0; i < Object.keys(response).length; i++) {
-		var value = Object.keys(response)[i];
-		var text = `Report #${value}`;
-		alienDropdown.append('option').text(text).property('value', value);
-	};
-};
-
-function addToDMDropdown(response) {
-	for (i = 0; i < Object.keys(response).length; i++) {
-		var value = Object.keys(response)[i];
-		var text = `Report #${value}`;
-		dogmanDropdown.append('option').text(text).property('value', value);
-	};
-};
-
-function addToHPDropdown(response) {
-	for (i = 0; i < Object.keys(response).length; i++) {
-		var value = Object.keys(response)[i];
-		var text = `${response[i].location}, ${response[i].state_abbrev}`;
-		hauntingDropdown.append('option').text(text).property('value', value);
-	};
-};
-
-
 
 // change data on dropdown select //
-bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL)});
-alienDropdown.on('change', function() {onChange(alienDropdown, alienURL)});
+bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL, 184)});
+alienDropdown.on('change', function() {onChange(alienDropdown, alienURL, 199)});
+dogmanDropdown.on('change', function() {onChange(dogmanDropdown, dogmanURL, 184)});
+hauntedDropdown.on('change', function() {onChange(hauntedDropdown, hauntedURL, 184)});
 
-function onChange(DD, URL) {
+function onChange(DD, URL, h) {
 	value = DD.property('value');
 	console.log(value);
 	document.getElementById('summaryText').style.display = 'block';
 
-	
 	d3.json(URL, function(response) {
 		stats.html('');
 
@@ -61,7 +46,6 @@ function onChange(DD, URL) {
 							Classification: ${response[value].classification}<br/>
 							<br/>
 							Incident:</p>`);
-
 		} else if (DD == alienDropdown) {
 			stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
 							Date: ${response[value].date}<br/>
@@ -70,10 +54,12 @@ function onChange(DD, URL) {
 							<br/>
 							Incident:</p>`);
 		};
+
 		summaryText.text('');
 		summaryText.text(response[value].summary);
 		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
+	document.getElementById('summaryText').style.maxHeight = `calc(100% - ${h}px)`;
 };
 
 // define buttons
@@ -108,6 +94,5 @@ function buttonToggle(clickedB, clickedD) {
 	button.style.backgroundColor = "darkorange";
 	button.style.color = "black";
 	dropdown.style.display = 'inline-block';
-	document.getElementById('summaryText').style.height = 'calc(100% - 153px)';
 	console.log(clickedD);
 };
