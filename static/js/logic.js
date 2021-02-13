@@ -24,7 +24,6 @@ var granimInstance = new Granim({
             transitionSpeed: 7000
         }
     }
-	 
 });
 
 //OSM tiles attribution and URL
@@ -65,21 +64,13 @@ L.control.layers(baseLayers).addTo(map);
 
 var AlienIcon = L.icon({
 	iconUrl: 'static/icons/alienOutlineSM.png',
-	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
-	//shadowSize:   [50, 64], // size of the shadow
-	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-	//shadowAnchor: [4, 62],  // the same for the shadow
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
 var squatchIcon = L.icon({
 	iconUrl: 'static/icons/squatchOutlineSM.png',
-	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
-	//shadowSize:   [50, 64], // size of the shadow
-	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-	//shadowAnchor: [4, 62],  // the same for the shadow
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
@@ -108,9 +99,11 @@ d3.json(alienURL, function(response) {
 	addToADropdown(response);
 });
 
+var markers = []
+
 function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
-	var markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
+	markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
@@ -128,18 +121,10 @@ function addMarkers(data, iconVar) {
 						data[i].title;
 
 			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker(location,{icon: iconVar})
-			.bindPopup(popup));
-		}
-
-	}
+			markers.addLayer(L.marker(location,{icon: iconVar}).bindPopup(popup));
+		};
+	};
 
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
-
-// FOR PLOTS ========================= //
-// d3.json('Data/json/Bigfoot.json').then(function(data) {
-// 	var states = Object.keys(data).map(data => data.state);
-// 	console.log(states);
-// })

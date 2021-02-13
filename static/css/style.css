@@ -57,7 +57,7 @@ body {
   display: none;
   overflow: auto;
   margin: 0px;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
   border-radius: 5px;
   background-color: rgba(0,0,0,.6);
   /* color: darkorange; */

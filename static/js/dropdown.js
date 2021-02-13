@@ -10,7 +10,7 @@ var summaryText = d3.select('#summaryText');
 function addToBFDropdown(response) {
 	for (i = 0; i < Object.keys(response).length; i++) {
 		var value = Object.keys(response)[i];
-		var text = `Report #${response[i].number}: ${response[i].county}, ${response[i].state}`;
+		var text = `Report #${response[i].number}`;
 	
 		bigfootDropdown.append('option').text(text).property('value', value);
 	};
@@ -19,7 +19,7 @@ function addToBFDropdown(response) {
 function addToADropdown(response) {
 	for (i = 0; i < Object.keys(response).length; i++) {
 		var value = Object.keys(response)[i];
-		var text = `Report #${value}: ${response[i].city}, ${response[i].state}`;
+		var text = `Report #${value}`;
 		alienDropdown.append('option').text(text).property('value', value);
 	};
 };
@@ -27,7 +27,7 @@ function addToADropdown(response) {
 function addToDMDropdown(response) {
 	for (i = 0; i < Object.keys(response).length; i++) {
 		var value = Object.keys(response)[i];
-		var text = `Report #${value}: ${response[i].location}, ${response[i].state_abbrev}`;
+		var text = `Report #${value}`;
 		dogmanDropdown.append('option').text(text).property('value', value);
 	};
 };
@@ -59,7 +59,8 @@ function onChangeBF() {
 						<br/>
 						Incident:</p>`);
 		summaryText.text('');
-		summaryText.text(response[value].summary)
+		summaryText.text(response[value].summary);
+		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
 };
 
@@ -78,6 +79,7 @@ function onChangeUFO() {
 						Incident:</p>`);
 		summaryText.text('');
 		summaryText.text(response[value].summary)
+		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
 };
 
