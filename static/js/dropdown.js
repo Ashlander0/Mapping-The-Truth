@@ -28,14 +28,15 @@ function addToDropdown(response, DD, text) {
 
 // change data on dropdown select //
 bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL, 184)});
-alienDropdown.on('change', function() {onChange(alienDropdown, alienURL, 199)});
-dogmanDropdown.on('change', function() {onChange(dogmanDropdown, dogmanURL, 184)});
-hauntedDropdown.on('change', function() {onChange(hauntedDropdown, hauntedURL, 184)});
+alienDropdown.on('change', function() {onChange(alienDropdown, alienURL, 214)});
+dogmanDropdown.on('change', function() {onChange(dogmanDropdown, dogmanURL, 169)});
+hauntedDropdown.on('change', function() {onChange(hauntedDropdown, hauntedURL, 154)});
 
 function onChange(DD, URL, h) {
 	value = DD.property('value');
 	console.log(value);
 	document.getElementById('summaryText').style.display = 'block';
+	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
 
 	d3.json(URL, function(response) {
 		stats.html('');
@@ -51,6 +52,16 @@ function onChange(DD, URL, h) {
 							Date: ${response[value].date}<br/>
 							Duration: ${response[value].duration}<br/>
 							Shape: ${response[value].shape}<br/>
+							<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
+							<br/>
+							Incident:</p>`);
+		} else if (DD == dogmanDropdown) {
+			stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
+							Date: ${response[value].date}<br/>
+							<br/>
+							Incident:</p>`);
+		} else if (DD == hauntedDropdown) {
+			stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
 							<br/>
 							Incident:</p>`);
 		};
@@ -59,7 +70,7 @@ function onChange(DD, URL, h) {
 		summaryText.text(response[value].summary);
 		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
-	document.getElementById('summaryText').style.maxHeight = `calc(100% - ${h}px)`;
+	
 };
 
 // define buttons

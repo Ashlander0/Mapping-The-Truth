@@ -138,9 +138,21 @@ function addMarkers(data, iconVar) {
 
 		// Check for location property
 		if (location) {
-			var popup = data[i].date +
-						'<br/><br/>' +
-						data[i].title;
+			if (iconVar == squatchIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].county}, ${data[i].state}<br/><br/>
+							${data[i].title}`;
+			} else if (iconVar == AlienIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].city}, ${data[i].state}<br/><br/>
+							${data[i].title}`;
+			} else if (iconVar == dogmanIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].location}, ${data[i].state_abbrev}`;
+			} else if (iconVar == hauntedIcon) {
+				var popup = `${data[i].location}<br/>
+							${data[i].city}, ${data[i].state_abbrev}`
+			};
 
 			// Add a new marker to the cluster group and bind a pop-up
 			markers.addLayer(L.marker(location,{icon: iconVar}).bindPopup(popup));

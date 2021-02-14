@@ -90,6 +90,9 @@ p {
   border-color: darkorange;
 }
 
+a {
+  color: darkorange;
+}
 
 
 /* Tracks */
@@ -106,7 +109,6 @@ p {
 
 /* Buttons */
 
-
 select {
   display: none;
   background-color: rgba(0,0,0,.0);
@@ -117,7 +119,10 @@ select {
   border-color: darkorange;
   border-width: 0px 0px 1px 0px;
   width: 100%;
-  max-width: 50%;
+}
+
+option {
+  background-color: rgb(38,38,38);
 }
 
 .toggle {
