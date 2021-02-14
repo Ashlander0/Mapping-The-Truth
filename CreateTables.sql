@@ -1,9 +1,25 @@
 drop table aliens;
+drop table aliensshort;
 drop table bigfoot;
 drop table dogman;
 drop table hauntings;
 
 CREATE TABLE aliens(
+	title VARCHAR(500),
+	city VARCHAR(60),
+	state VARCHAR(60),
+	date_time date,
+	shape VARCHAR(60),
+	duration VARCHAR(60),
+	stats VARCHAR(500),
+	report_link VARCHAR(200),
+	summary VARCHAR(50000), 
+	posted date,
+	latitude decimal, 
+	longitude decimal
+);
+
+CREATE TABLE aliensshort(
 	title VARCHAR(500),
 	city VARCHAR(60),
 	state VARCHAR(60),
@@ -73,27 +89,32 @@ CREATE TABLE hauntings(
 );
 
 COPY aliens(title, city, state, date_time, shape, duration, stats, report_link, summary, posted, latitude, longitude)
-FROM 'C:\Users\Matthew\Desktop\Homework\Project-Two-The-Sasquatch-affair-\Data\aliens-1.csv'
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\aliens-1.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY aliens(title, city, state, date_time, shape, duration, stats, report_link, summary, posted, latitude, longitude)
-FROM 'C:\Users\Matthew\Desktop\Homework\Project-Two-The-Sasquatch-affair-\Data\aliens-2.csv'
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\aliens-2.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY aliensshort(title, city, state, date_time, shape, duration, stats, report_link, summary, posted, latitude, longitude)
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\aliens-short.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY bigfoot(summary, location_details, county, state, season, title, latitude, longitude, date, number, classification, geohash, temperature_high, temperature_mid, temperature_low, dew_point, humidity, cloud_cover, moon_phase, precip_intensity, precip_probability, precip_type, pressure, weather, uv_index, visibility, wind_bearing, wind_speed)
-FROM 'C:\Users\Matthew\Desktop\Homework\Project-Two-The-Sasquatch-affair-\Data\bigfoot.csv'
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\bigfoot.csv'
 DELIMITER ','
 CSV HEADER;
 	
 COPY dogman(state, state_abbrev, location, longitude, latitude, date, summary)
-FROM 'C:\Users\Matthew\Desktop\Homework\Project-Two-The-Sasquatch-affair-\Data\dogman.csv'
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\dogman.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY hauntings(city, country, summary, location, state, state_abbrev, longitude, latitude, city_longitude, city_latitude)
-FROM 'C:\Users\Matthew\Desktop\Homework\Project-Two-The-Sasquatch-affair-\Data\hauntedplaces.csv'
+FROM 'C:\Users\Matthew\Desktop\Homework\Mapping-The-Truth\Data\hauntedplaces.csv'
 DELIMITER ','
 CSV HEADER;
 

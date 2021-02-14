@@ -24,7 +24,6 @@ var granimInstance = new Granim({
             transitionSpeed: 7000
         }
     }
-	 
 });
 
 //OSM tiles attribution and URL
@@ -65,21 +64,25 @@ L.control.layers(baseLayers).addTo(map);
 
 var AlienIcon = L.icon({
 	iconUrl: 'static/icons/alienOutlineSM.png',
-	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
-	//shadowSize:   [50, 64], // size of the shadow
-	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-	//shadowAnchor: [4, 62],  // the same for the shadow
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
 var squatchIcon = L.icon({
 	iconUrl: 'static/icons/squatchOutlineSM.png',
-	//shadowUrl: 'leaf-shadow.png',
 	iconSize:     [25, 25], // size of the icon
-	//shadowSize:   [50, 64], // size of the shadow
-	//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-	//shadowAnchor: [4, 62],  // the same for the shadow
+	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+});
+
+var dogmanIcon = L.icon({
+	iconUrl: 'static/icons/dogmanOutlineSM.png',
+	iconSize:     [25, 25], // size of the icon
+	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
+});
+
+var hauntedIcon = L.icon({
+	iconUrl: 'static/icons/hauntedOutlineSM.png',
+	iconSize:     [25, 25], // size of the icon
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
@@ -99,18 +102,30 @@ var hauntedURL = 'Data/json/hauntedplaces.json';
 // Grab the Bigfoot data
 d3.json(bigfootURL, function(response) {
 	addMarkers(response, squatchIcon);
-	addToBFDropdown(response);
+	addToDropdown(response, bigfootDropdown);
 });
 
 // Grab Alien data
 d3.json(alienURL, function(response) {
 	addMarkers(response, AlienIcon);
-	addToADropdown(response);
+	addToDropdown(response, alienDropdown);
 });
+
+d3.json(dogmanURL, function(response) {
+	addMarkers(response, dogmanIcon);
+	addToDropdown(response, dogmanDropdown);
+});
+
+d3.json(hauntedURL, function(response) {
+	addMarkers(response, hauntedIcon);
+	addToDropdown(response, hauntedDropdown);
+});
+
+var markers = []
 
 function addMarkers(data, iconVar) {
 	// Create a new marker cluster group
-	var markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
+	markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
@@ -123,23 +138,27 @@ function addMarkers(data, iconVar) {
 
 		// Check for location property
 		if (location) {
-			var popup = data[i].date +
-						'<br/><br/>' +
-						data[i].title;
+			if (iconVar == squatchIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].county}, ${data[i].state}<br/><br/>
+							${data[i].title}`;
+			} else if (iconVar == AlienIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].city}, ${data[i].state}<br/><br/>
+							${data[i].title}`;
+			} else if (iconVar == dogmanIcon) {
+				var popup = `${data[i].date}<br/>
+							${data[i].location}, ${data[i].state_abbrev}`;
+			} else if (iconVar == hauntedIcon) {
+				var popup = `${data[i].location}<br/>
+							${data[i].city}, ${data[i].state_abbrev}`
+			};
 
 			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker(location,{icon: iconVar})
-			.bindPopup(popup));
-		}
-
-	}
+			markers.addLayer(L.marker(location,{icon: iconVar}).bindPopup(popup));
+		};
+	};
 
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
-
-// FOR PLOTS ========================= //
-// d3.json('Data/json/Bigfoot.json').then(function(data) {
-// 	var states = Object.keys(data).map(data => data.state);
-// 	console.log(states);
-// })

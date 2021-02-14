@@ -1,92 +1,109 @@
 // Add options for each sighting to dropdown
-var bigfootDropdown = d3.select('#bigfoot');
-var alienDropdown = d3.select('#alien');
+var bigfootDropdown = d3.select('#BFdropdown');
+var alienDropdown = d3.select('#UFOdropdown');
+var dogmanDropdown = d3.select('#DMdropdown');
+var hauntedDropdown = d3.select('#HPdropdown');
 var stats = d3.select('#stat');
 var summaryText = d3.select('#summaryText');
 
-function addToBFDropdown(response) {
+// populate dropdowns //
+function addToDropdown(response, DD, text) {
 	for (i = 0; i < Object.keys(response).length; i++) {
-		var report = response[i].number;
-		//var loc = `${response[i].state} - ${response[i].date}`
 		var value = Object.keys(response)[i];
-		bigfootDropdown.append('option').text(`Report #${report}`).property('value', value);
+		if (DD == bigfootDropdown) {
+			var text = `Report #${response[i].number}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == alienDropdown) {
+			var text = `Report #${value}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == dogmanDropdown) {
+			var text = `Report #${value}`;
+			DD.append('option').text(text).property('value', value);
+		} else if (DD == hauntedDropdown) {
+			var text = `${response[i].location}, ${response[i].state_abbrev}`;
+			DD.append('option').text(text).property('value', value);
+		};
 	};
 };
 
-function addToADropdown(response) {
-	for (i = 0; i < Object.keys(response).length; i++) {
-		var loc = `${response[i].city}, ${response[i].state}`
-		var value = Object.keys(response)[i];
-		alienDropdown.append('option').text(`${loc}`).property('value', value);
-	};
-};
+// change data on dropdown select //
+bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL, 184)});
+alienDropdown.on('change', function() {onChange(alienDropdown, alienURL, 214)});
+dogmanDropdown.on('change', function() {onChange(dogmanDropdown, dogmanURL, 169)});
+hauntedDropdown.on('change', function() {onChange(hauntedDropdown, hauntedURL, 154)});
 
-bigfootDropdown.on('change', onChangeBF);
-alienDropdown.on('change', onChangeUFO);
-
-function onChangeBF() {
-	value = bigfootDropdown.property('value');
+function onChange(DD, URL, h) {
+	value = DD.property('value');
 	console.log(value);
 	document.getElementById('summaryText').style.display = 'block';
+	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
 
-	d3.json(bigfootURL, function(response) {
+	d3.json(URL, function(response) {
 		stats.html('');
-		stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Classification: ${response[value].classification}<br/>
-						<br/>
-						Incident:</p>`);
-		summaryText.text('');
-		summaryText.text(response[value].summary)
-	});
-};
 
-function onChangeUFO() {
-	value = alienDropdown.property('value');
-	console.log(value);
-	document.getElementById('summaryText').style.display = 'block';
+		if (DD == bigfootDropdown) {
+			stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
+							Date: ${response[value].date}<br/>
+							Classification: ${response[value].classification}<br/>
+							<br/>
+							Incident:</p>`);
+		} else if (DD == alienDropdown) {
+			stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
+							Date: ${response[value].date}<br/>
+							Duration: ${response[value].duration}<br/>
+							Shape: ${response[value].shape}<br/>
+							<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
+							<br/>
+							Incident:</p>`);
+		} else if (DD == dogmanDropdown) {
+			stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
+							Date: ${response[value].date}<br/>
+							<br/>
+							Incident:</p>`);
+		} else if (DD == hauntedDropdown) {
+			stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
+							<br/>
+							Incident:</p>`);
+		};
+
+		summaryText.text('');
+		summaryText.text(response[value].summary);
+		map.flyTo([response[value].latitude, response[value].longitude], 15);
+	});
 	
-	d3.json(alienURL, function(response) {
-		stats.html('');
-		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Duration: ${response[value].duration}<br/>
-						Shape: ${response[value].shape}<br/>
-						<br/>
-						Incident:</p>`);
-		summaryText.text('');
-		summaryText.text(response[value].summary)
-	});
 };
 
+// define buttons
 var BFbutton = d3.select('#BFbutton');
 var UFObutton = d3.select('#UFObutton');
-//  bigfootDropdown = d3.select('#bigfoot');
-//  alienDropdown = d3.select('#alien');
+var DMbutton = d3.select('#DMbutton');
+var HPbutton = d3.select('#HPbutton');
 
-BFbutton.on('click', BFtoggle);
-UFObutton.on('click', UFOtoggle);
+// define on click actions
+BFbutton.on('click', function() {buttonToggle('BFbutton', 'BFdropdown')});
+UFObutton.on('click', function() {buttonToggle('UFObutton', 'UFOdropdown')});
+DMbutton.on('click', function() {buttonToggle('DMbutton', 'DMdropdown')});
+HPbutton.on('click', function() {buttonToggle('HPbutton', 'HPdropdown')});
 
-function BFtoggle() {
-	document.getElementById("UFObutton").style.backgroundColor = "rgba(0,0,0,0)";
-	document.getElementById("UFObutton").style.color = "darkorange";
-	document.getElementById("alien").style.display = "none";
+function buttonToggle(clickedB, clickedD) {
+	var darkbuttons = document.getElementsByClassName("toggle");
+	var darkdropdowns = document.getElementsByClassName('dropdown');
+	var button = document.getElementById(clickedB);
+	var dropdown = document.getElementById(clickedD);
+	
+	// disable everything
+	for (b = 0; b < darkbuttons.length; b++) {
+		darkbuttons[b].style.backgroundColor = "rgba(0,0,0,0)";
+		darkbuttons[b].style.color = "darkorange";
+		
+		for (d = 0; d < darkdropdowns.length; d++) {
+			darkdropdowns[d].style.display = "none";
+		};
+	};
 
-	document.getElementById("BFbutton").style.backgroundColor = "darkorange";
-	document.getElementById("BFbutton").style.color = "black";
-	document.getElementById("bigfoot").style.display = "block";
-	document.getElementById('summaryText').style.height = 'calc(100% - 153px)';
-	console.log('Bigfoot');
-}
-
-function UFOtoggle() {
-	document.getElementById("BFbutton").style.backgroundColor = "rgba(0,0,0,0)";
-	document.getElementById("BFbutton").style.color = "darkorange";
-	document.getElementById("bigfoot").style.display = "none";
-
-	document.getElementById("UFObutton").style.backgroundColor = "darkorange";
-	document.getElementById("UFObutton").style.color = "black";
-	document.getElementById("alien").style.display = "block";
-	document.getElementById('summaryText').style.height = 'calc(100% - 168px)';
-	console.log('UFO');
-}
+	// re-enable appropriate controls
+	button.style.backgroundColor = "darkorange";
+	button.style.color = "black";
+	dropdown.style.display = 'inline-block';
+	console.log(clickedD);
+};

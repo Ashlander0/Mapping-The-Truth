@@ -57,7 +57,7 @@ body {
   display: none;
   overflow: auto;
   margin: 0px;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
   border-radius: 5px;
   background-color: rgba(0,0,0,.6);
   /* color: darkorange; */
@@ -90,6 +90,9 @@ p {
   border-color: darkorange;
 }
 
+a {
+  color: darkorange;
+}
 
 
 /* Tracks */
@@ -105,17 +108,6 @@ p {
 
 
 /* Buttons */
-#UFObutton {
-  outline: none;
-  background-color: darkorange;
-  color: black;
-}
-
-#BFbutton {
-  outline: none;
-  background-color: darkorange;
-  color: black;
-}
 
 select {
   display: none;
@@ -129,9 +121,14 @@ select {
   width: 100%;
 }
 
+option {
+  background-color: rgb(38,38,38);
+}
+
 .toggle {
   display: inline-block;
-  /* background-color: darkorange; */
+  background-color: darkorange;
+  outline: none;
   width: calc(50% - 2px);
   height: 25px;
   text-align: center;
