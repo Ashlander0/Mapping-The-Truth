@@ -129,25 +129,25 @@ var datasets = [bigfoot, ufo, dogman, haunted]
 	d3.json(datasets[0].url, function(response) {
 		addMarkers(response, datasets[0]);
 		addToDropdown(response, datasets[0]);
-		onChange(response, datasets[0], 184);
+		onChange(response, datasets[0], 201);
 		buttonToggle(datasets[0]);
 	});
 	d3.json(datasets[1].url, function(response) {
 		addMarkers(response, datasets[1]);
 		addToDropdown(response, datasets[1]);
-		onChange(response, datasets[1], 214);
+		onChange(response, datasets[1], 231);
 		buttonToggle(datasets[1]);
 	});
 	d3.json(datasets[2].url, function(response) {
 		addMarkers(response, datasets[2]);
 		addToDropdown(response, datasets[2]);
-		onChange(response, datasets[2], 169);
+		onChange(response, datasets[2], 186);
 		buttonToggle(datasets[2]);
 	});
 	d3.json(datasets[3].url, function(response) {
 		addMarkers(response, datasets[3]);
 		addToDropdown(response, datasets[3]);
-		onChange(response, datasets[3], 154);
+		onChange(response, datasets[3], 171);
 		buttonToggle(datasets[3]);
 	});
 // };
