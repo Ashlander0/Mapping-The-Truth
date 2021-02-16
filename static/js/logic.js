@@ -61,103 +61,125 @@ var baseLayers = {
 //Add baseLayers to map as control layers
 L.control.layers(baseLayers).addTo(map);
  
-
-var AlienIcon = L.icon({
-	iconUrl: 'static/icons/alienOutlineSM.png',
-	iconSize:     [25, 25], // size of the icon
+var bigfootIcon = L.icon({
+	iconUrl: 'static/icons/squatchOutlineSM.png',
+	iconSize:     [25, 25], 
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
-var squatchIcon = L.icon({
-	iconUrl: 'static/icons/squatchOutlineSM.png',
-	iconSize:     [25, 25], // size of the icon
+var ufoIcon = L.icon({
+	iconUrl: 'static/icons/alienOutlineSM.png',
+	iconSize:     [25, 25],
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
 var dogmanIcon = L.icon({
 	iconUrl: 'static/icons/dogmanOutlineSM.png',
-	iconSize:     [25, 25], // size of the icon
+	iconSize:     [25, 25],
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
 var hauntedIcon = L.icon({
 	iconUrl: 'static/icons/hauntedOutlineSM.png',
-	iconSize:     [25, 25], // size of the icon
+	iconSize:     [25, 25],
 	popupAnchor:  [0, -30] // point from which the popup should open relative to the iconAnchor
 });
 
-var customOptions = {
-	'maxWidth': '500',
-	'minWidth': '320',
-	'maxHeight': '500',
-	'className' : 'custom'
-}
-
 // Assemble API query URL
-var bigfootURL = 'Data/json/bigfoot.json';
-var alienURL = 'Data/json/aliens-short.json';
-var dogmanURL = 'Data/json/dogman.json';
-var hauntedURL = 'Data/json/hauntedplaces.json';
+var bigfoot = {
+	url: 'Data/json/bigfoot.json',
+	button: d3.select('#BFbutton'),
+	dropdown: d3.select('#BFdropdown'),
+	icon: bigfootIcon
+};
+
+var ufo = {
+	url: 'Data/json/aliens-short.json',
+	button: d3.select('#UFObutton'),
+	dropdown: d3.select('#UFOdropdown'),
+	icon: ufoIcon
+};
+
+var dogman = {
+	url: 'Data/json/dogman.json',
+	button: d3.select('#DMbutton'),
+	dropdown: d3.select('#DMdropdown'),
+	icon: dogmanIcon
+};
+
+var haunted = {
+	url: 'Data/json/hauntedplaces.json',
+	button: d3.select('#HPbutton'),
+	dropdown: d3.select('#HPdropdown'),
+	icon: hauntedIcon
+};
+
+var datasets = [bigfoot, ufo, dogman, haunted]
+
+// var datasets = {
+// 	'bigfoot': bigfoot,
+// 	'ufo': ufo,
+// 	'dogman': dogman,
+// 	'haunted': haunted
+// };
 
 // Grab the Bigfoot data
-d3.json(bigfootURL, function(response) {
-	addMarkers(response, squatchIcon);
-	addToDropdown(response, bigfootDropdown);
-});
-
-// Grab Alien data
-d3.json(alienURL, function(response) {
-	addMarkers(response, AlienIcon);
-	addToDropdown(response, alienDropdown);
-});
-
-d3.json(dogmanURL, function(response) {
-	addMarkers(response, dogmanIcon);
-	addToDropdown(response, dogmanDropdown);
-});
-
-d3.json(hauntedURL, function(response) {
-	addMarkers(response, hauntedIcon);
-	addToDropdown(response, hauntedDropdown);
-});
+// for (set = 0; set < datasets.length; set++) {
+	// var dataset = datasets[set]
+	d3.json(datasets[0].url, function(response) {
+		addMarkers(response, datasets[0]);
+		addToDropdown(response, datasets[0]);
+	});
+	d3.json(datasets[1].url, function(response) {
+		addMarkers(response, datasets[1]);
+		addToDropdown(response, datasets[1]);
+	});
+	d3.json(datasets[2].url, function(response) {
+		addMarkers(response, datasets[2]);
+		addToDropdown(response, datasets[2]);
+	});
+	d3.json(datasets[3].url, function(response) {
+		addMarkers(response, datasets[3]);
+		addToDropdown(response, datasets[3]);
+	});
+// };
 
 var markers = []
 
-function addMarkers(data, iconVar) {
+function addMarkers(data, dataset) {
 	// Create a new marker cluster group
 	markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
-
 		// Set the data location property to a variable
-
 		var lat = data[i].latitude;
 		var lon = data[i].longitude;
 		var location = [lat, lon];
 
 		// Check for location property
 		if (location) {
-			if (iconVar == squatchIcon) {
+			if (dataset.icon == bigfootIcon) {
 				var popup = `${data[i].date}<br/>
 							${data[i].county}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
-			} else if (iconVar == AlienIcon) {
+			} else if (dataset.icon == ufoIcon) {
 				var popup = `${data[i].date}<br/>
 							${data[i].city}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
-			} else if (iconVar == dogmanIcon) {
+			} else if (dataset.icon == dogmanIcon) {
 				var popup = `${data[i].date}<br/>
 							${data[i].location}, ${data[i].state_abbrev}`;
-			} else if (iconVar == hauntedIcon) {
+			} else if (dataset.icon == hauntedIcon) {
 				var popup = `${data[i].location}<br/>
 							${data[i].city}, ${data[i].state_abbrev}`
 			};
 
 			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker(location,{icon: iconVar}).bindPopup(popup));
+			markers.addLayer(L.marker(location, {icon: dataset.icon}).bindPopup(popup));
+			
 		};
-	};
+	};console.log(dataset.icon)
 
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
