@@ -1,53 +1,56 @@
 // Add options for each sighting to dropdown
-var bigfootDropdown = d3.select('#BFdropdown');
-var alienDropdown = d3.select('#UFOdropdown');
-var dogmanDropdown = d3.select('#DMdropdown');
-var hauntedDropdown = d3.select('#HPdropdown');
 var stats = d3.select('#stat');
 var summaryText = d3.select('#summaryText');
 
 // populate dropdowns //
-function addToDropdown(response, DD, text) {
+function addToDropdown(response, dataset) {
 	for (i = 0; i < Object.keys(response).length; i++) {
 		var value = Object.keys(response)[i];
-		if (DD == bigfootDropdown) {
+		var dropdown = dataset.dropdown;
+
+		if (dataset.icon == bigfootIcon) {
 			var text = `Report #${response[i].number}`;
-			DD.append('option').text(text).property('value', value);
-		} else if (DD == alienDropdown) {
+			dropdown.append('option').text(text).property('value', value);
+
+		} else if (dataset.icon == ufoIcon) {
 			var text = `Report #${value}`;
-			DD.append('option').text(text).property('value', value);
-		} else if (DD == dogmanDropdown) {
+			dropdown.append('option').text(text).property('value', value);
+		
+		} else if (dataset.icon == dogmanIcon) {
 			var text = `Report #${value}`;
-			DD.append('option').text(text).property('value', value);
-		} else if (DD == hauntedDropdown) {
+			dropdown.append('option').text(text).property('value', value);
+		
+		} else if (dataset.icon == hauntedIcon) {
 			var text = `${response[i].location}, ${response[i].state_abbrev}`;
-			DD.append('option').text(text).property('value', value);
+			dropdown.append('option').text(text).property('value', value);
 		};
 	};
 };
 
 // change data on dropdown select //
-bigfootDropdown.on('change', function() {onChange(bigfootDropdown, bigfootURL, 184)});
-alienDropdown.on('change', function() {onChange(alienDropdown, alienURL, 214)});
-dogmanDropdown.on('change', function() {onChange(dogmanDropdown, dogmanURL, 169)});
-hauntedDropdown.on('change', function() {onChange(hauntedDropdown, hauntedURL, 154)});
+datasets[0].dropdown.on('change', function() {onChange(datasets[0], 184)});
+datasets[1].dropdown.on('change', function() {onChange(datasets[1], 214)});
+datasets[2].dropdown.on('change', function() {onChange(datasets[2], 169)});
+datasets[3].dropdown.on('change', function() {onChange(datasets[3], 154)});
 
-function onChange(DD, URL, h) {
-	value = DD.property('value');
+function onChange(dataset, h) {
+	var dropdown = dataset.dropdown;
+	var url = dataset.url;
+	value = dropdown.property('value');
 	console.log(value);
 	document.getElementById('summaryText').style.display = 'block';
 	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
 
-	d3.json(URL, function(response) {
+	d3.json(url, function(response) {
 		stats.html('');
 
-		if (DD == bigfootDropdown) {
+		if (dropdown == datasets[0].dropdown) {
 			stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
 							Date: ${response[value].date}<br/>
 							Classification: ${response[value].classification}<br/>
 							<br/>
 							Incident:</p>`);
-		} else if (DD == alienDropdown) {
+		} else if (dropdown == datasets[1].dropdown) {
 			stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
 							Date: ${response[value].date}<br/>
 							Duration: ${response[value].duration}<br/>
@@ -55,12 +58,12 @@ function onChange(DD, URL, h) {
 							<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
 							<br/>
 							Incident:</p>`);
-		} else if (DD == dogmanDropdown) {
+		} else if (dropdown == datasets[2].dropdown) {
 			stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
 							Date: ${response[value].date}<br/>
 							<br/>
 							Incident:</p>`);
-		} else if (DD == hauntedDropdown) {
+		} else if (dropdown == datasets[3].dropdown) {
 			stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
 							<br/>
 							Incident:</p>`);
@@ -73,37 +76,26 @@ function onChange(DD, URL, h) {
 	
 };
 
-// define buttons
-var BFbutton = d3.select('#BFbutton');
-var UFObutton = d3.select('#UFObutton');
-var DMbutton = d3.select('#DMbutton');
-var HPbutton = d3.select('#HPbutton');
-
 // define on click actions
-BFbutton.on('click', function() {buttonToggle('BFbutton', 'BFdropdown')});
-UFObutton.on('click', function() {buttonToggle('UFObutton', 'UFOdropdown')});
-DMbutton.on('click', function() {buttonToggle('DMbutton', 'DMdropdown')});
-HPbutton.on('click', function() {buttonToggle('HPbutton', 'HPdropdown')});
+datasets[0].button.on('click', function() {buttonToggle(datasets[0])});
+datasets[1].button.on('click', function() {buttonToggle(datasets[1])});
+datasets[2].button.on('click', function() {buttonToggle(datasets[2])});
+datasets[3].button.on('click', function() {buttonToggle(datasets[3])});
 
-function buttonToggle(clickedB, clickedD) {
-	var darkbuttons = document.getElementsByClassName("toggle");
-	var darkdropdowns = document.getElementsByClassName('dropdown');
-	var button = document.getElementById(clickedB);
-	var dropdown = document.getElementById(clickedD);
+function buttonToggle(dataset) {
+	var darkbuttons = d3.selectAll('.toggle-on');;
+	var darkdropdowns = d3.selectAll('.dropdown');
+	var button = dataset.button;
+	var dropdown = dataset.dropdown;
 	
 	// disable everything
-	for (b = 0; b < darkbuttons.length; b++) {
-		darkbuttons[b].style.backgroundColor = "rgba(0,0,0,0)";
-		darkbuttons[b].style.color = "darkorange";
-		
-		for (d = 0; d < darkdropdowns.length; d++) {
-			darkdropdowns[d].style.display = "none";
-		};
-	};
+	darkbuttons.classed('toggle-on', false);
+	darkbuttons.classed('toggle-off', true);
+	darkdropdowns.style('display', 'none');
 
 	// re-enable appropriate controls
-	button.style.backgroundColor = "darkorange";
-	button.style.color = "black";
-	dropdown.style.display = 'inline-block';
-	console.log(clickedD);
+	button.classed('toggle-on', true);
+	button.classed('toggle-off', false);
+	dropdown.style('display', 'inline-block');
+	console.log(dropdown);
 };

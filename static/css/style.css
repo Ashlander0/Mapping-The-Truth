@@ -125,13 +125,28 @@ option {
   background-color: rgb(38,38,38);
 }
 
-.toggle {
+.toggle-on {
   display: inline-block;
   background-color: darkorange;
   outline: none;
   width: calc(50% - 2px);
   height: 25px;
   text-align: center;
+  color: black;
+  font-family: monospace;
+  font-weight: bold;
+  border-width: 0px;
+  margin-bottom: 10px;
+}
+
+.toggle-off {
+  display: inline-block;
+  background-color: rgba(0,0,0,0);
+  outline: none;
+  width: calc(50% - 2px);
+  height: 25px;
+  text-align: center;
+  color: darkorange;
   font-family: monospace;
   font-weight: bold;
   border-width: 0px;
