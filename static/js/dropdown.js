@@ -27,21 +27,15 @@ function addToDropdown(response, dataset) {
 	};
 };
 
-// change data on dropdown select //
-datasets[0].dropdown.on('change', function() {onChange(datasets[0], 184)});
-datasets[1].dropdown.on('change', function() {onChange(datasets[1], 214)});
-datasets[2].dropdown.on('change', function() {onChange(datasets[2], 169)});
-datasets[3].dropdown.on('change', function() {onChange(datasets[3], 154)});
-
-function onChange(dataset, h) {
+function onChange(response, dataset, h) {
 	var dropdown = dataset.dropdown;
-	var url = dataset.url;
-	value = dropdown.property('value');
-	console.log(value);
-	document.getElementById('summaryText').style.display = 'block';
-	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
 
-	d3.json(url, function(response) {
+	dropdown.on('change', function() {
+		var value = dropdown.property('value');
+		console.log(value);
+		document.getElementById('summaryText').style.display = 'block';
+		document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
+
 		stats.html('');
 
 		if (dropdown == datasets[0].dropdown) {
@@ -73,29 +67,24 @@ function onChange(dataset, h) {
 		summaryText.text(response[value].summary);
 		map.flyTo([response[value].latitude, response[value].longitude], 15);
 	});
-	
 };
-
-// define on click actions
-datasets[0].button.on('click', function() {buttonToggle(datasets[0])});
-datasets[1].button.on('click', function() {buttonToggle(datasets[1])});
-datasets[2].button.on('click', function() {buttonToggle(datasets[2])});
-datasets[3].button.on('click', function() {buttonToggle(datasets[3])});
 
 function buttonToggle(dataset) {
 	var darkbuttons = d3.selectAll('.toggle-on');;
 	var darkdropdowns = d3.selectAll('.dropdown');
 	var button = dataset.button;
 	var dropdown = dataset.dropdown;
-	
-	// disable everything
-	darkbuttons.classed('toggle-on', false);
-	darkbuttons.classed('toggle-off', true);
-	darkdropdowns.style('display', 'none');
 
-	// re-enable appropriate controls
-	button.classed('toggle-on', true);
-	button.classed('toggle-off', false);
-	dropdown.style('display', 'inline-block');
-	console.log(dropdown);
+	button.on('click', function() {
+		// disable everything
+		darkbuttons.classed('toggle-on', false);
+		darkbuttons.classed('toggle-off', true);
+		darkdropdowns.style('display', 'none');
+
+		// re-enable appropriate controls
+		button.classed('toggle-on', true);
+		button.classed('toggle-off', false);
+		dropdown.style('display', 'inline-block');
+		console.log(dropdown);
+	});
 };
