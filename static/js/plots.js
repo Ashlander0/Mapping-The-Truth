@@ -8,16 +8,16 @@ var ufoStates = [];
 var ufoShape = [];
 
 //import BF and UFO data
-d3.json(bfURL, function(bfData) {
-	d3.json(ufoURL, function(ufoData) {
- 		for (i = 0; i < Object.keys(bfData).length; i++) {
-			bfStates[i] = bfData[i].state;
-			bfMoon[i] = bfData[i].moon_phase;
+function plotData(dataset) {
+	for (i = 0; i < dataset.length; i++) {
+ 		if (dataset == datasets[0]) {
+			bfStates[i] = dataset[i].state;
+			bfMoon[i] = dataset[i].moon_phase;
 		}
-		for (i = 0; i < Object.keys(ufoData).length; i++) {
-			ufoStates[i] = ufoData[i].state;
-			ufoShape[i] = ufoData[i].shape;
-		}
+		else if (dataset == datasets[1]) {
+			ufoStates[i] = dataset[i].state;
+			ufoShape[i] = dataset[i].shape;
+		};
 
 		// for plot testing
 		// var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
@@ -112,5 +112,5 @@ d3.json(bfURL, function(bfData) {
 		var data = [trace1, trace2, trace3, trace4];
 
 		Plotly.plot('vis1', data, layout, {showTips: false})
-	})
-});
+	};
+};
