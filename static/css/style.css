@@ -37,9 +37,9 @@ body {
 .sidebox {
   width: calc(25% - 22px);
   /* min-width: 200px; */
-  height: calc(100% - 32px);
+  height: calc(100% - 22px);
   margin: 5px;
-  padding: 10px;
+  padding: 5px;
 }
 
 #summaryBox {
@@ -50,17 +50,17 @@ body {
   width: 100%;
   height: auto;
   background-color: rgba(0,0,0,.0);
-  padding: 0px 0px 5px 4px;
+  padding: 2px 4px;
+  margin: 0px 5px;
 }
 
 #summaryText {
   display: none;
   overflow: auto;
-  margin: 0px;
+  margin: 5px;
   padding: 5px 10px 10px 10px;
   border-radius: 5px;
   background-color: rgba(0,0,0,.6);
-  /* color: darkorange; */
 }
 
 p {
@@ -76,7 +76,7 @@ p {
 #map {
   display: block;
   /* vertical-align: bottom; */
-  width: calc(50% - 42px);
+  width: calc(50% - 22px);
   /* min-width: 100px; */
   height: calc(100% - 220px);
   margin: 5px auto 5px auto;
@@ -118,7 +118,9 @@ select {
   outline: none;
   border-color: darkorange;
   border-width: 0px 0px 1px 0px;
-  width: 100%;
+  width: calc(100% - 10px);
+  margin: 5px 5px 0px 5px;
+  padding: 2px 0px;
 }
 
 option {
@@ -129,26 +131,26 @@ option {
   display: inline-block;
   background-color: darkorange;
   outline: none;
-  width: calc(50% - 2px);
+  width: calc(50% - 10px);
   height: 25px;
   text-align: center;
   color: black;
   font-family: monospace;
   font-weight: bold;
   border-width: 0px;
-  margin-bottom: 10px;
+  margin: 5px;
 }
 
 .toggle-off {
   display: inline-block;
   background-color: rgba(0,0,0,0);
   outline: none;
-  width: calc(50% - 2px);
+  width: calc(50% - 10px);
   height: 25px;
   text-align: center;
   color: darkorange;
   font-family: monospace;
   font-weight: bold;
   border-width: 0px;
-  margin-bottom: 10px;
+  margin: 5px;
 }

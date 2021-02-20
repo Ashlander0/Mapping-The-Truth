@@ -27,64 +27,79 @@ function addToDropdown(response, dataset) {
 	};
 };
 
-function onChange(response, dataset, h) {
+
+// Dropdown controls
+function dropdownChange(response, dataset, h) {
 	var dropdown = dataset.dropdown;
+	var value = dropdown.property('value');
 
 	dropdown.on('change', function() {
-		var value = dropdown.property('value');
-		console.log(value);
-		document.getElementById('summaryText').style.display = 'block';
-		document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
-
-		stats.html('');
-
-		if (dropdown == datasets[0].dropdown) {
-			stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
-							Date: ${response[value].date}<br/>
-							Classification: ${response[value].classification}<br/>
-							<br/>
-							Incident:</p>`);
-		} else if (dropdown == datasets[1].dropdown) {
-			stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
-							Date: ${response[value].date}<br/>
-							Duration: ${response[value].duration}<br/>
-							Shape: ${response[value].shape}<br/>
-							<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
-							<br/>
-							Incident:</p>`);
-		} else if (dropdown == datasets[2].dropdown) {
-			stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
-							Date: ${response[value].date}<br/>
-							<br/>
-							Incident:</p>`);
-		} else if (dropdown == datasets[3].dropdown) {
-			stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
-							<br/>
-							Incident:</p>`);
-		};
-
-		summaryText.text('');
-		summaryText.text(response[value].summary);
-		map.flyTo([response[value].latitude, response[value].longitude], 15);
+		onChange(response, dataset, h, value);
 	});
 };
 
+function onChange(response, dataset, h, value) {
+	var dropdown = dataset.dropdown
+	value = dropdown.property('value');
+	console.log(value);
+	document.getElementById('summaryText').style.display = 'block';
+	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
+
+	stats.html('');
+
+	if (dropdown == datasets[0].dropdown) {
+		stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
+						Date: ${response[value].date}<br/>
+						Classification: ${response[value].classification}<br/>
+						<br/>
+						Incident:</p>`);
+	} else if (dropdown == datasets[1].dropdown) {
+		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
+						Date: ${response[value].date}<br/>
+						Duration: ${response[value].duration}<br/>
+						Shape: ${response[value].shape}<br/>
+						<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
+						<br/>
+						Incident:</p>`);
+	} else if (dropdown == datasets[2].dropdown) {
+		stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
+						Date: ${response[value].date}<br/>
+						<br/>
+						Incident:</p>`);
+	} else if (dropdown == datasets[3].dropdown) {
+		stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
+						<br/>
+						Incident:</p>`);
+	};
+
+	summaryText.text('');
+	summaryText.text(response[value].summary);
+	map.flyTo([response[value].latitude, response[value].longitude], 15);
+};
+
+
+// Button Toggle
 function buttonToggle(dataset) {
+	var button = dataset.button;
+
+	button.on('click', function () {
+		onToggle(dataset);
+	});
+};
+
+function onToggle(dataset) {
 	var darkbuttons = d3.selectAll('.toggle-on');;
 	var darkdropdowns = d3.selectAll('.dropdown');
 	var button = dataset.button;
 	var dropdown = dataset.dropdown;
 
-	button.on('click', function() {
-		// disable everything
-		darkbuttons.classed('toggle-on', false);
-		darkbuttons.classed('toggle-off', true);
-		darkdropdowns.style('display', 'none');
+	// disable everything
+	darkbuttons.classed('toggle-on', false);
+	darkbuttons.classed('toggle-off', true);
+	darkdropdowns.style('display', 'none');
 
-		// re-enable appropriate controls
-		button.classed('toggle-on', true);
-		button.classed('toggle-off', false);
-		dropdown.style('display', 'inline-block');
-		console.log(dropdown);
-	});
+	// re-enable appropriate controls
+	button.classed('toggle-on', true);
+	button.classed('toggle-off', false);
+	dropdown.style('display', 'inline-block');
 };

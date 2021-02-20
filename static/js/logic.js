@@ -114,7 +114,7 @@ var haunted = {
 	icon: hauntedIcon
 };
 
-var datasets = [bigfoot, ufo, dogman, haunted]
+var datasets = [bigfoot, ufo, dogman, haunted];
 
 // var datasets = {
 // 	'bigfoot': bigfoot,
@@ -127,34 +127,41 @@ var datasets = [bigfoot, ufo, dogman, haunted]
 // for (set = 0; set < datasets.length; set++) {
 	// var dataset = datasets[set]
 	d3.json(datasets[0].url, function(response) {
-		addMarkers(response, datasets[0]);
+		addMarkers(response, datasets[0], 201);
 		addToDropdown(response, datasets[0]);
-		onChange(response, datasets[0], 184);
+		dropdownChange(response, datasets[0], 201);
 		buttonToggle(datasets[0]);
+		plotData(response);
+		// datasets[0].button.on('click', buttonToggle(datasets[0]));
 	});
 	d3.json(datasets[1].url, function(response) {
-		addMarkers(response, datasets[1]);
+		addMarkers(response, datasets[1], 231);
 		addToDropdown(response, datasets[1]);
-		onChange(response, datasets[1], 214);
+		dropdownChange(response, datasets[1], 231);
 		buttonToggle(datasets[1]);
+		plotData(response);
+		// datasets[1].button.on('click', buttonToggle(datasets[1]));
 	});
 	d3.json(datasets[2].url, function(response) {
-		addMarkers(response, datasets[2]);
+		addMarkers(response, datasets[2], 186);
 		addToDropdown(response, datasets[2]);
-		onChange(response, datasets[2], 169);
+		dropdownChange(response, datasets[2], 186);
 		buttonToggle(datasets[2]);
+		// datasets[2].button.on('click', buttonToggle(datasets[2]));
 	});
 	d3.json(datasets[3].url, function(response) {
-		addMarkers(response, datasets[3]);
+		addMarkers(response, datasets[3], 171);
 		addToDropdown(response, datasets[3]);
-		onChange(response, datasets[3], 154);
+		dropdownChange(response, datasets[3], 171);
 		buttonToggle(datasets[3]);
+		// datasets[3].button.on('click', buttonToggle(datasets[3]));
 	});
 // };
 
-function addMarkers(data, dataset) {
+function addMarkers(data, dataset, h) {
 	// Create a new marker cluster group
 	var markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
+	var popup = '';
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
@@ -162,28 +169,37 @@ function addMarkers(data, dataset) {
 		var lat = data[i].latitude;
 		var lon = data[i].longitude;
 		var location = [lat, lon];
+		var value = i;
 
 		// Check for location property
 		if (location) {
 			if (dataset.icon == bigfootIcon) {
-				var popup = `${data[i].date}<br/>
+				popup = `${data[i].date}<br/>
 							${data[i].county}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
 			} else if (dataset.icon == ufoIcon) {
-				var popup = `${data[i].date}<br/>
+				popup = `${data[i].date}<br/>
 							${data[i].city}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
 			} else if (dataset.icon == dogmanIcon) {
-				var popup = `${data[i].date}<br/>
+				popup = `${data[i].date}<br/>
 							${data[i].location}, ${data[i].state_abbrev}`;
 			} else if (dataset.icon == hauntedIcon) {
-				var popup = `${data[i].location}<br/>
+				popup = `${data[i].location}<br/>
 							${data[i].city}, ${data[i].state_abbrev}`
 			};
-			// Add a new marker to the cluster group and bind a pop-up
-			markers.addLayer(L.marker(location, {icon: dataset.icon}).bindPopup(popup));
 		};
+
+		// Add a new marker to the cluster group and bind a pop-up
+		var marker = L.marker(location, {icon: dataset.icon}).bindPopup(popup).on('click', function() {
+			// onToggle(dataset);
+			// console.log(value);
+			// onChange(data, dataset, h, value)
+		});
+
+		marker.addTo(markers);
 	};
+
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
