@@ -3,11 +3,14 @@ html {
   height: 100%;
 }
 
+@media (max-width : 599px) {
 body {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
   padding: 5px;
   margin: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 #canvas-complex {
@@ -23,11 +26,13 @@ body {
 }
 
 #title {
+  display: flex;
+  order: 1;
   height: auto;
   width: calc(50% - 12px);
   max-width: 400px;
   min-width: 150px;
-  margin: 50px auto 100px auto;
+  margin: 20px auto;
   text-align: center;
   color: darkorange;
   font-family: papyrus;
@@ -35,15 +40,17 @@ body {
 }
 
 .sidebox {
-  width: calc(25% - 22px);
+  display: block;
+  width: calc(100% - 22px);
   /* min-width: 200px; */
-  height: calc(100% - 22px);
+  height: calc(50% - 22px);
   margin: 5px;
   padding: 5px;
 }
 
 #summaryBox {
-  float:left;
+  display: flex;
+  order: 3;
 }
 
 #stat {
@@ -55,7 +62,7 @@ body {
 }
 
 #summaryText {
-  display: none;
+  display: block;
   overflow: auto;
   margin: 5px;
   padding: 5px 10px 10px 10px;
@@ -70,15 +77,17 @@ p {
 }
 
 #vis1 {
-  float: right;
+  display: none;
+  order: 4;
 }
 
 #map {
-  display: block;
+  display: flex;
+  order: 2;
   /* vertical-align: bottom; */
-  width: calc(50% - 22px);
+  width: calc(100% - 22px);
   /* min-width: 100px; */
-  height: calc(100% - 220px);
+  height: calc(50% - 22px);
   margin: 5px auto 5px auto;
   padding: 5px;
 }
@@ -118,7 +127,7 @@ select {
   outline: none;
   border-color: darkorange;
   border-width: 0px 0px 1px 0px;
-  width: calc(100% - 10px);
+  width: calc(100% - 22px);
   margin: 5px 5px 0px 5px;
   padding: 2px 0px;
 }
@@ -131,8 +140,8 @@ option {
   display: inline-block;
   background-color: darkorange;
   outline: none;
-  width: calc(50% - 10px);
-  height: 25px;
+  width: calc(25% - 10px);
+  height: 35px;
   text-align: center;
   color: black;
   font-family: monospace;
@@ -154,3 +163,160 @@ option {
   border-width: 0px;
   margin: 5px;
 }
+}
+
+@media (min-width : 600px) {
+
+  body {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    padding: 5px;
+    margin: 0px;
+  }
+
+  #canvas-complex {
+    display: block;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  #title {
+    height: auto;
+    width: calc(50% - 12px);
+    max-width: 400px;
+    min-width: 150px;
+    margin: 50px auto 100px auto;
+    text-align: center;
+    color: darkorange;
+    font-family: papyrus;
+    background-color: rgba(0,0,0,.5);
+  }
+
+  .sidebox {
+    width: calc(25% - 22px);
+    /* min-width: 200px; */
+    height: calc(100% - 22px);
+    margin: 5px;
+    padding: 5px;
+  }
+
+  #summaryBox {
+    float:left;
+  }
+
+  #stat {
+    width: 100%;
+    height: auto;
+    background-color: rgba(0,0,0,.0);
+    padding: 2px 4px;
+    margin: 0px 5px;
+  }
+
+  #summaryText {
+    display: none;
+    overflow: auto;
+    margin: 5px;
+    padding: 5px 10px 10px 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.6);
+  }
+
+  p {
+    margin: 0px;
+    font-family: monospace;
+    color: darkorange;
+  }
+
+  #vis1 {
+    float: right;
+  }
+
+  #map {
+    display: block;
+    /* vertical-align: bottom; */
+    width: calc(50% - 22px);
+    /* min-width: 100px; */
+    height: calc(100% - 220px);
+    margin: 5px auto 5px auto;
+    padding: 5px;
+  }
+
+  .bgBox {
+    background-color: rgba(0,0,0,.5);
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkorange;
+  }
+
+  a {
+    color: darkorange;
+  }
+
+
+  /* Tracks */
+  /* Let's get this party started */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: darkorange; 
+  }
+
+
+  /* Buttons */
+
+  select {
+    display: none;
+    background-color: rgba(0,0,0,.0);
+    color: darkorange;
+    font-family: monospace;
+    font-size: 10pt;
+    outline: none;
+    border-color: darkorange;
+    border-width: 0px 0px 1px 0px;
+    width: calc(100% - 10px);
+    margin: 5px 5px 0px 5px;
+    padding: 2px 0px;
+  }
+
+  option {
+    background-color: rgb(38,38,38);
+  }
+
+  .toggle-on {
+    display: inline-block;
+    background-color: darkorange;
+    outline: none;
+    width: calc(50% - 10px);
+    height: 25px;
+    text-align: center;
+    color: black;
+    font-family: monospace;
+    font-weight: bold;
+    border-width: 0px;
+    margin: 5px;
+  }
+
+  .toggle-off {
+    display: inline-block;
+    background-color: rgba(0,0,0,0);
+    outline: none;
+    width: calc(50% - 10px);
+    height: 25px;
+    text-align: center;
+    color: darkorange;
+    font-family: monospace;
+    font-weight: bold;
+    border-width: 0px;
+    margin: 5px;
+  }
+}
+
