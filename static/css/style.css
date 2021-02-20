@@ -3,7 +3,7 @@ html {
   height: 100%;
 }
 
-@media (max-width : 599px) {
+@media (max-width : 8in) {
 body {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
@@ -165,7 +165,7 @@ option {
 }
 }
 
-@media (min-width : 600px) {
+@media (min-width : 8in) {
 
   body {
     width: calc(100% - 10px);
