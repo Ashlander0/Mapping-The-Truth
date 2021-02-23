@@ -31,50 +31,50 @@ function addToDropdown(response, dataset) {
 // Dropdown controls
 function dropdownChange(response, dataset, h) {
 	var dropdown = dataset.dropdown;
-	var value = dropdown.property('value');
-
 	dropdown.on('change', function() {
-		onChange(response, dataset, h, value);
+		var value = dropdown.property('value');
+		console.log(value);
+
+		onChange(response[value], dataset, h);
 	});
 };
 
-function onChange(response, dataset, h, value) {
+function onChange(response, dataset, h) {
 	var dropdown = dataset.dropdown
-	value = dropdown.property('value');
-	console.log(value);
+
 	document.getElementById('summaryText').style.display = 'block';
-	document.getElementById('summaryText').style.height = `calc(100% - ${h}px)`;
+	document.getElementById('summaryText').style.maxHeight = `calc(100% - ${h}px)`;
 
 	stats.html('');
 
 	if (dropdown == datasets[0].dropdown) {
-		stats.html(`<p>Location: ${response[value].county}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Classification: ${response[value].classification}<br/>
+		stats.html(`<p>Location: ${response.county}, ${response.state}<br/>
+						Date: ${response.date}<br/>
+						Classification: ${response.classification}<br/>
 						<br/>
 						Incident:</p>`);
 	} else if (dropdown == datasets[1].dropdown) {
-		stats.html(`<p>Location: ${response[value].city}, ${response[value].state}<br/>
-						Date: ${response[value].date}<br/>
-						Duration: ${response[value].duration}<br/>
-						Shape: ${response[value].shape}<br/>
-						<a href='${response[value].report_link}' target="_blank">Report Link</a><br/>
+		stats.html(`<p>Location: ${response.city}, ${response.state}<br/>
+						Date: ${response.date}<br/>
+						Duration: ${response.duration}<br/>
+						Shape: ${response.shape}<br/>
+						<a href='${response.report_link}' target="_blank">Report Link</a><br/>
 						<br/>
 						Incident:</p>`);
 	} else if (dropdown == datasets[2].dropdown) {
-		stats.html(`<p>Location: ${response[value].location}, ${response[value].state_abbrev}<br/>
-						Date: ${response[value].date}<br/>
+		stats.html(`<p>Location: ${response.location}, ${response.state_abbrev}<br/>
+						Date: ${response.date}<br/>
 						<br/>
 						Incident:</p>`);
 	} else if (dropdown == datasets[3].dropdown) {
-		stats.html(`<p>Location: ${response[value].city}, ${response[value].state_abbrev}<br/>
+		stats.html(`<p>Location: ${response.city}, ${response.state_abbrev}<br/>
 						<br/>
 						Incident:</p>`);
 	};
 
 	summaryText.text('');
-	summaryText.text(response[value].summary);
-	map.flyTo([response[value].latitude, response[value].longitude], 15);
+	summaryText.text(response.summary);
+	map.flyTo([response.latitude, response.longitude], 15);
 };
 
 

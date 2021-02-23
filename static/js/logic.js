@@ -4,10 +4,9 @@ var granimInstance = new Granim({
     direction: 'diagonal',
     isPausedWhenNotInView: true,
     image : {
-        source: 'images/bg.png',
-		// source: 'images/aleinbg.jpeg',
-		stretchMode: ['stretch-if-bigger', 'stretch-if-bigger'],
-		position: ['center','bottom'],
+        source: 'images/bg1080.png',
+		stretchMode: ['stretch-if-smaller', 'stretch-if-smaller'],
+		position: ['center','center'],
         blendingMode: 'multiply'
     },
     states : {
@@ -44,7 +43,9 @@ var ElevationAttrib = '&copy; ' + ElevationLink;
 //Creation of map tiles
 var ElevationMap = L.tileLayer(ElevationURL, {attribution: ElevationAttrib});
 var osmMap = L.tileLayer(osmURL, {attribution: osmAttrib});
-var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib});
+var cartoMap = L.tileLayer(cartoURL, {attribution: cartoAttrib,
+	tileSize: 512,
+    zoomOffset: -1});
 
 //Map creation
 var map = L.map('map',{
@@ -132,7 +133,6 @@ var datasets = [bigfoot, ufo, dogman, haunted];
 		dropdownChange(response, datasets[0], 201);
 		buttonToggle(datasets[0]);
 		plotData(response);
-		// datasets[0].button.on('click', buttonToggle(datasets[0]));
 	});
 	d3.json(datasets[1].url, function(response) {
 		addMarkers(response, datasets[1], 231);
@@ -140,49 +140,46 @@ var datasets = [bigfoot, ufo, dogman, haunted];
 		dropdownChange(response, datasets[1], 231);
 		buttonToggle(datasets[1]);
 		plotData(response);
-		// datasets[1].button.on('click', buttonToggle(datasets[1]));
 	});
 	d3.json(datasets[2].url, function(response) {
 		addMarkers(response, datasets[2], 186);
 		addToDropdown(response, datasets[2]);
 		dropdownChange(response, datasets[2], 186);
 		buttonToggle(datasets[2]);
-		// datasets[2].button.on('click', buttonToggle(datasets[2]));
 	});
 	d3.json(datasets[3].url, function(response) {
 		addMarkers(response, datasets[3], 171);
 		addToDropdown(response, datasets[3]);
 		dropdownChange(response, datasets[3], 171);
 		buttonToggle(datasets[3]);
-		// datasets[3].button.on('click', buttonToggle(datasets[3]));
 	});
 // };
 
+var markers = L.markerClusterGroup({maxClusterRadius: 100, disableClusteringAtZoom: 9});
+
 function addMarkers(data, dataset, h) {
-	// Create a new marker cluster group
-	var markers = L.markerClusterGroup({maxClusterRadius: 65, disableClusteringAtZoom: 9});
 	var popup = '';
 
 	// Loop through data
 	for (var i = 0; i < Object.keys(data).length; i++) {
-		// Set the data location property to a variable
 		var lat = data[i].latitude;
 		var lon = data[i].longitude;
 		var location = [lat, lon];
-		var value = i;
+		const value = i;
 
-		// Check for location property
 		if (location) {
 			if (dataset.icon == bigfootIcon) {
 				popup = `${data[i].date}<br/>
 							${data[i].county}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
 			} else if (dataset.icon == ufoIcon) {
-				popup = `${data[i].date}<br/>
+				popup = `Report #${i}<br/>
+							${data[i].date}<br/>
 							${data[i].city}, ${data[i].state}<br/><br/>
 							${data[i].title}`;
 			} else if (dataset.icon == dogmanIcon) {
-				popup = `${data[i].date}<br/>
+				popup = `Report #${i}<br/>
+							${data[i].date}<br/>
 							${data[i].location}, ${data[i].state_abbrev}`;
 			} else if (dataset.icon == hauntedIcon) {
 				popup = `${data[i].location}<br/>
@@ -192,9 +189,9 @@ function addMarkers(data, dataset, h) {
 
 		// Add a new marker to the cluster group and bind a pop-up
 		var marker = L.marker(location, {icon: dataset.icon}).bindPopup(popup).on('click', function() {
-			// onToggle(dataset);
-			// console.log(value);
-			// onChange(data, dataset, h, value)
+			onToggle(dataset);
+			// document.getElementById('dropdown').value = 5;
+			onChange(data[value], dataset, h)
 		});
 
 		marker.addTo(markers);
