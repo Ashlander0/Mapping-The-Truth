@@ -3,7 +3,7 @@ html {
   height: 100%;
 }
 
-@media (max-width : 8in) {
+@media (max-device-width : 8in) {
 body {
   width: calc(100% - 10px);
   height: calc(100% - 10px);
@@ -33,9 +33,11 @@ body {
   max-width: 400px;
   min-width: 150px;
   margin: 20px auto;
+  padding: 10px;
   text-align: center;
   color: darkorange;
   font-family: papyrus;
+  font-size: 38pt;
   background-color: rgba(0,0,0,.5);
 }
 
@@ -49,7 +51,7 @@ body {
 }
 
 #summaryBox {
-  display: flex;
+  /* display: flex; */
   order: 3;
 }
 
@@ -57,12 +59,14 @@ body {
   width: 100%;
   height: auto;
   background-color: rgba(0,0,0,.0);
+  font-size: 28pt;
   padding: 2px 4px;
   margin: 0px 5px;
 }
 
 #summaryText {
-  display: block;
+  display: none;
+  height: calc(100% - 386px);
   overflow: auto;
   margin: 5px;
   padding: 5px 10px 10px 10px;
@@ -107,7 +111,8 @@ a {
 /* Tracks */
 /* Let's get this party started */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 15px;
+  height: 15px;
 }
 
 /* Handle */
@@ -123,17 +128,18 @@ select {
   background-color: rgba(0,0,0,.0);
   color: darkorange;
   font-family: monospace;
-  font-size: 10pt;
+  font-size: 28pt;
   outline: none;
   border-color: darkorange;
   border-width: 0px 0px 1px 0px;
   width: calc(100% - 22px);
-  margin: 5px 5px 0px 5px;
+  margin: 20px 5px 0px 5px;
   padding: 2px 0px;
 }
 
 option {
   background-color: rgb(38,38,38);
+  font-size: 28pt;
 }
 
 .toggle-on {
@@ -141,10 +147,11 @@ option {
   background-color: darkorange;
   outline: none;
   width: calc(25% - 10px);
-  height: 35px;
+  height: 60px;
   text-align: center;
   color: black;
   font-family: monospace;
+  font-size: 28pt;
   font-weight: bold;
   border-width: 0px;
   margin: 5px;
@@ -154,18 +161,19 @@ option {
   display: inline-block;
   background-color: rgba(0,0,0,0);
   outline: none;
-  width: calc(50% - 10px);
-  height: 25px;
+  width: calc(25% - 10px);
+  height: 60px;
   text-align: center;
   color: darkorange;
   font-family: monospace;
+  font-size: 28pt;
   font-weight: bold;
   border-width: 0px;
   margin: 5px;
 }
 }
 
-@media (min-width : 8in) {
+@media (min-device-width : 8in) {
 
   body {
     width: calc(100% - 10px);
@@ -221,6 +229,7 @@ option {
   #summaryText {
     display: none;
     overflow: auto;
+    height: 100%;
     margin: 5px;
     padding: 5px 10px 10px 10px;
     border-radius: 5px;
