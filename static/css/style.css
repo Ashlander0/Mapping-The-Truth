@@ -13,6 +13,13 @@ body {
   flex-direction: column;
 }
 
+#mobile-scroller {
+  overflow: auto;
+  max-height: calc(100% - 140px);
+  font-size: 12pt;
+  font-family: monospace;
+}
+
 #canvas-complex {
   display: block;
   position: absolute;
@@ -29,14 +36,14 @@ body {
   display: flex;
   order: 1;
   height: auto;
-  width: calc(50% - 12px);
-  max-width: 400px;
+  width: auto;
+  /* max-width: 400px; */
   min-width: 150px;
   margin: 20px auto;
-  padding: 10px;
+  padding: 10px 30px;
   text-align: center;
   color: darkorange;
-  font-family: papyrus;
+  font-family: papyrus, monospace;
   font-size: 38pt;
   background-color: rgba(0,0,0,.5);
 }
@@ -56,10 +63,9 @@ body {
 }
 
 #stat {
-  width: 100%;
   height: auto;
   background-color: rgba(0,0,0,.0);
-  font-size: 28pt;
+  /* font-size: 28pt; */
   padding: 2px 4px;
   margin: 0px 5px;
 }
@@ -212,6 +218,12 @@ option {
     height: calc(100% - 22px);
     margin: 5px;
     padding: 5px;
+  }
+
+  #mobile-scroller {
+    height: 100%;
+    max-height: calc(100% - 81px);
+    width: 100%;
   }
 
   #summaryBox {
