@@ -3,8 +3,8 @@ var bar = new ldBar(".myBar", {
 	"stroke-width": 5,
 	"preset": "circle",
 	"value": 0,
-	"data-precision": '.00000001',
-	"data-duration": '20'
+	"data-precision": '.01',
+	"data-duration": 200
    });
 
 // GRANIM
