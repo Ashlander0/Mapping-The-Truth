@@ -1,3 +1,12 @@
+var bar = new ldBar(".myBar", {
+	"stroke": 'rgb(255,140,0)',
+	"stroke-width": 5,
+	"preset": "circle",
+	"value": 0,
+	"data-precision": '.00000001',
+	"data-duration": '20'
+   });
+
 // GRANIM
 var granimInstance = new Granim({
     element: '#canvas-complex',
@@ -123,7 +132,6 @@ var datasets = [bigfoot, ufo, dogman, haunted];
 // 	'dogman': dogman,
 // 	'haunted': haunted
 // };
-
 // Grab the Bigfoot data
 // for (set = 0; set < datasets.length; set++) {
 	// var dataset = datasets[set]
@@ -147,13 +155,28 @@ var datasets = [bigfoot, ufo, dogman, haunted];
 		dropdownChange(response, datasets[2], 105);
 		buttonToggle(datasets[2]);
 	});
-	d3.json(datasets[3].url, function(response) {
+	d3.json(datasets[3].url, function(response) {		
 		addMarkers(response, datasets[3], 90);
 		addToDropdown(response, datasets[3]);
 		dropdownChange(response, datasets[3], 90);
 		buttonToggle(datasets[3]);
 	});
 // };
+
+progress = 0
+
+function updateLoader(p) {
+	progress += p;
+	bar.set(
+		progress,     /* target value. */
+		true   /* enable animation. default is true */
+	  );
+	
+	if (progress > 99) {
+		document.getElementById('loader').style.display = 'none';
+		document.getElementById('loadwrapper').style.display = 'none';
+	};
+};
 
 var markers = L.markerClusterGroup({maxClusterRadius: 100, disableClusteringAtZoom: 9});
 
@@ -186,17 +209,21 @@ function addMarkers(data, dataset, h) {
 							${data[i].city}, ${data[i].state_abbrev}`
 			};
 		};
+		// p += ((i+1)/Object.keys(data).length);
+		updateLoader((1/Object.keys(data).length)*25)
 
 		// Add a new marker to the cluster group and bind a pop-up
 		var marker = L.marker(location, {icon: dataset.icon}).bindPopup(popup).on('click', function() {
 			onToggle(dataset);
 			// document.getElementById('dropdown').value = 5;
-			onChange(data[value], dataset, h)
+			onChange(data[value], dataset, h);
 		});
 
 		marker.addTo(markers);
+		
 	};
 
 	// Add our marker cluster layer to the map
 	map.addLayer(markers);
 };
+
