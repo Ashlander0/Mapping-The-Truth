@@ -242,10 +242,10 @@ option {
   }
 
   body {
-    width: calc(100% - 10px);
+    width: calc(100% - 200px);
     height: calc(100% - 10px);
     padding: 5px;
-    margin: 0px;
+    margin: auto;
   }
 
   #canvas-complex {
