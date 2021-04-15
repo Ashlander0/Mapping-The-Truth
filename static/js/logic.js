@@ -140,14 +140,14 @@ var datasets = [bigfoot, ufo, dogman, haunted];
 		addToDropdown(response, datasets[0]);
 		dropdownChange(response, datasets[0], 120);
 		buttonToggle(datasets[0]);
-		plotData(response);
+		// plotData(response);
 	});
 	d3.json(datasets[1].url, function(response) {
 		addMarkers(response, datasets[1], 150);
 		addToDropdown(response, datasets[1]);
 		dropdownChange(response, datasets[1], 150);
 		buttonToggle(datasets[1]);
-		plotData(response);
+		// plotData(response);
 	});
 	d3.json(datasets[2].url, function(response) {
 		addMarkers(response, datasets[2], 105);
@@ -209,13 +209,12 @@ function addMarkers(data, dataset, h) {
 							${data[i].city}, ${data[i].state_abbrev}`
 			};
 		};
-		// p += ((i+1)/Object.keys(data).length);
+
 		updateLoader((1/Object.keys(data).length)*25)
 
 		// Add a new marker to the cluster group and bind a pop-up
 		var marker = L.marker(location, {icon: dataset.icon}).bindPopup(popup).on('click', function() {
 			onToggle(dataset);
-			// document.getElementById('dropdown').value = 5;
 			onChange(data[value], dataset, h);
 		});
 
