@@ -36,4 +36,4 @@ Click any of the dataset buttons in the top left to activate the dropdown menu f
 ### Map
 ![](images/map_demo.png)
 
-The map is fairly self explainitory. It features the usual scrolling and zooming functionality. The data is represented on the map by different icons according to the dataset. Clicking on an icon zooms the map into the location, and opens a popup with some basic information about the incident. It will also populate the left panel with more detailed information similar to finding that incident in the dropdown menu.
+The map is fairly self explainitory. It features the usual scrolling and zooming functionality. The map style can be changed via a menu in the top right corner, which may help with readability on darker screens. The data is represented on the map by different icons according to the dataset. Clicking on an icon zooms the map into the location, and opens a popup with some basic information about the incident. It will also populate the left panel with more detailed information similar to finding that incident in the dropdown menu.
